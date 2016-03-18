@@ -37,5 +37,9 @@ public class MenuMulti extends Activity implements View.OnClickListener {
             this.finish();
         }
 
+        if(v.getId() == R.id.buttonRetour){
+            finish();
+        }
+
     }
 }
