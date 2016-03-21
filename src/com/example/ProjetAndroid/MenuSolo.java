@@ -33,7 +33,10 @@ public class MenuSolo extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-
+        if(v.getId() == R.id.PartieSolo){
+            Intent menu = new Intent(this, PartieSolo.class);
+            startActivity(menu);
+        }
         
         if(v.getId() == R.id.buttonRetour){
             finish();

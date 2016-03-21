@@ -9,8 +9,8 @@ import tmx_loader.*;
  * Created by maël on 21/03/2016.
  */
 public class test extends Activity {
-    ImageView mapView;
-    String FILENAME = "test1.tmx";
+    //ImageView mapView;
+    //String FILENAME = "test1.tmx";
 
 
     /** Called when the activity is first created. */
@@ -18,7 +18,8 @@ public class test extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
-
+        //mapView = (ImageView)findViewById(R.id.MapImage);
+/*
         // Start the parser, get back TMX data object
         TileMapData t = TMXLoader.readTMX(FILENAME, this);
 
@@ -36,6 +37,6 @@ public class test extends Activity {
             Toast errorMessage = Toast.makeText(getApplicationContext(), "Map could not be loaded", Toast.LENGTH_LONG);
             errorMessage.show();
         }
-
+*/
     }
 }
