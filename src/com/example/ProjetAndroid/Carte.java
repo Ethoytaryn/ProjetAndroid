@@ -23,7 +23,7 @@ public class Carte extends View {
     public Carte(Context context, AttributeSet attrs) {
         super(context, attrs);
         rigth = 0;
-        left = 2300;
+        left = 2600;
         top = 0;
         bottom = 2560;
         dx = 0;
