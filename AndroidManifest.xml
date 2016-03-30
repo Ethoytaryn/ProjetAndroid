@@ -21,6 +21,9 @@
         <activity android:name=".MenuMulti"
                   android:label="MenuMulti">
         </activity>
+        <activity android:name=".Partie"
+                  android:label="Partie">
+        </activity>
     </application>
 
 </manifest>
