@@ -34,12 +34,8 @@ public class MenuSolo extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.PartieSolo){
-<<<<<<< HEAD
-            Intent menu = new Intent(this, Partie.class);
-            startActivity(menu);
-=======
 
->>>>>>> parent of 74575ab... v0.0.0011 on en est la maintenant
+
         }
         
         if(v.getId() == R.id.buttonRetour){

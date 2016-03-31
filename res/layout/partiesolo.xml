@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-<<<<<<< HEAD
               android:layout_width="fill_parent"
               android:layout_height="match_parent">
 
@@ -26,10 +25,5 @@
         android:useDefaultMargins="true"
     >
 </GridLayout>
-=======
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@drawable/map" android:id="@+id/test">
->>>>>>> parent of 74575ab... v0.0.0011 on en est la maintenant
 
 </LinearLayout>
