@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent">
+              android:layout_height="match_parent">
 
     <LinearLayout android:gravity="center"
                   android:layout_height="fill_parent"
@@ -14,30 +14,23 @@
                 android:layout_width="500px"
                 android:background="@drawable/btn_green"
                 style="@style/ButtonText"
-                android:text="Solo"
-                android:id="@+id/buttonSolo"/>
+                android:text="Lancer la partie"
+                android:id="@+id/PartieSolo"/>
 
         <Button android:layout_height="wrap_content"
                 android:layout_width="500px"
                 android:background="@drawable/btn_green"
                 style="@style/ButtonText"
-                android:text="Multijoueur"
-                android:id="@+id/buttonMulti"/>
+                android:text="Paramètres"
+                android:id="@+id/ParamSolo"/>
 
         <Button android:layout_height="wrap_content"
                 android:layout_width="500px"
                 android:background="@drawable/btn_green"
                 style="@style/ButtonText"
-                android:text="Personnage"
-                android:id="@+id/buttonPerso"/>
+                android:text="Retour au menu"
+                android:id="@+id/buttonRetour"/>
 
-        <Button android:layout_height="wrap_content"
-                android:layout_width="500px"
-                android:background="@drawable/btn_green"
-                style="@style/ButtonText"
-                android:text="Quitter"
-                android:id="@+id/buttonQuit"/>
+    </LinearLayout>
 
 </LinearLayout>
-</LinearLayout>
-
