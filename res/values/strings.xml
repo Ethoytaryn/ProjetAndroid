@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ProjetAndroid</string>
+
+    <string name="hello">Hello World, DOMXMLParsingActivity!</string>
+    <string name="app_name">SimpleDOMParser</string>
+    <string name="button">Parse XML using DOM</string>
+    <string name="nameLabel">Name</string>
+    <string name="salaryLabel">Salary</string>
+    <string name="designationLabel">Designation</string>
+
 
     <style name="ButtonText">
         <item name="android:layout_width">fill_parent</item>
