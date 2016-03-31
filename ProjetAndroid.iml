@@ -13,6 +13,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="library" name="projectAndroid" level="project" />
+=======
+    <orderEntry type="library" name="cocos2d-android" level="project" />
+>>>>>>> 40e837ac065e3ee2f794ef69f32cd8da92731780
   </component>
 </module>

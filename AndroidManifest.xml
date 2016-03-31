@@ -14,6 +14,19 @@
             </intent-filter>
         </activity>
 
+<<<<<<< HEAD
+=======
+        <activity android:name=".MenuSolo"
+                  android:label="MenuSolo">
+        </activity>
+
+        <activity android:name=".MenuMulti"
+                  android:label="MenuMulti">
+        </activity>
+        <activity android:name=".Partie"
+                  android:label="Partie">
+        </activity>
+>>>>>>> 40e837ac065e3ee2f794ef69f32cd8da92731780
     </application>
 
 </manifest>
