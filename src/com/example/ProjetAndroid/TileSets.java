@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class TileSets {
 
-    ArrayList<TileSet> listTileSets;
+    ArrayList<TileSet> listTileSets = new ArrayList<>();
 
     TileSets(NodeList e){
 

@@ -1,40 +1,39 @@
 package com.example.ProjetAndroid;
 
-import android.app.Activity;
 import android.content.res.AssetManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-
 import java.io.IOException;
 import java.io.InputStream;
 
 
-public class XMLDocument extends Activity {
+public class XMLDocument {
 
-    String m_nomFichier;
-    XMLDOMParser parser;
-    private Document doc;
-    InputStream stream;
+    private String m_nomFichier;
+    private XMLDOMParser m_parser;
+    private Document m_doc;
+    private AssetManager m_listAssets;
 
-
-    XMLDocument(String nomFichier) throws IOException {
+    XMLDocument(String nomFichier, AssetManager listAssets) throws IOException {
 
         m_nomFichier = nomFichier;
-        parser = new XMLDOMParser();
-        OpenDocument();
+        m_parser = new XMLDOMParser();
+        m_listAssets = listAssets;
+
+
+        EnregistrerDocument();
+
     }
 
-    private void OpenDocument() throws IOException {
-            stream =  getAssets().open(m_nomFichier);
-            doc = parser.getDocument(stream);
-            CloseDocument();
-    }
-
-    private void CloseDocument() throws  IOException {
+    private void EnregistrerDocument() throws IOException {
+        InputStream stream = m_listAssets.open(m_nomFichier);
+        m_doc = m_parser.getDocument(stream);
         stream.close();
+
     }
+
 
     public NodeList getNode(String nomNode){
-        return doc.getElementsByTagName(nomNode);
+        return m_doc.getElementsByTagName(nomNode);
     }
 }

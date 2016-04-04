@@ -27,7 +27,7 @@ public class TileSet {
         coord[1] = (numeroTuile-coord[0])/m_columns; //numeroLigne
         coord[2] = coord[0]*(m_tilewidth+m_spacing);  //pixelX
         coord[3] = coord[1]*(m_tileheight+m_spacing); //pixelY
-        if(m_nomTileSet == "tileset") {
+        if(m_nomTileSet == "tileset_nature") {
 
             return coord;
         }

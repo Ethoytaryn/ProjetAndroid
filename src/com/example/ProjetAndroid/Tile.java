@@ -11,14 +11,14 @@ import android.view.View;
  */
 public class Tile extends View {
 
-    String tileset;
+    TileSet tileset;
 
     public Tile(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     public void onDraw(Canvas canvas,int[]coord){
-        Drawable tuile = getResources().getDrawable(R.drawable.tileset);
+        Drawable tuile = getResources().getDrawable(R.drawable.tileset_nature);
         tuile.setBounds(coord[0],coord[1],coord[2],coord[3]);
         tuile.draw(canvas);
 
