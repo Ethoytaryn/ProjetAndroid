@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.ProjetAndroid.Jeu.GameActivity;
 import com.example.ProjetAndroid.R;
-import com.example.ProjetAndroid.Jeu.JeuActivity;
+import com.example.ProjetAndroid.Jeu.GameLoop;
 
 /**
  * Created by Guillaume on 16/03/2016.
@@ -36,7 +37,7 @@ public class MenuSolo extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.PartieSolo){
-            Intent jeu = new Intent(this, JeuActivity.class);
+            Intent jeu = new Intent(this, GameActivity.class);
             startActivity(jeu);
 
         }

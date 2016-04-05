@@ -1,12 +1,9 @@
 package com.example.ProjetAndroid.BriqueJeu;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.View;
-import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
 import java.util.ArrayList;
 
 /**
@@ -22,9 +19,9 @@ public class ListTiles extends View {
 
     }
 
-    Void setListtile(NodeList e){
+    void setListtile(NodeList e){
         for(int i=0; i < e.getLength();i++){
-            listTiles.add(new Tile(context,attrs));
+
         }
     }
 

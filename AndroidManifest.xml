@@ -20,7 +20,7 @@
         <activity android:name=".Menu.MenuMulti"
                   android:label="@string/app_name">
         </activity>
-        <activity android:name=".Jeu.JeuActivity"
+        <activity android:name=".Jeu.GameActivity"
                   android:label="@string/app_name">
         </activity>
     </application>
