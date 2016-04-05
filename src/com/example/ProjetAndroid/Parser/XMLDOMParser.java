@@ -1,4 +1,4 @@
-package com.example.ProjetAndroid;
+package com.example.ProjetAndroid.Parser;
 
 import java.io.IOException;
 import java.io.InputStream;

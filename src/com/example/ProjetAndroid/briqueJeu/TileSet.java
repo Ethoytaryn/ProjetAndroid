@@ -1,4 +1,4 @@
-package com.example.ProjetAndroid;
+package com.example.ProjetAndroid.BriqueJeu;
 
 import org.w3c.dom.Element;
 

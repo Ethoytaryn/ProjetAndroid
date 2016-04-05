@@ -1,37 +1,22 @@
-package com.example.ProjetAndroid;
+package com.example.ProjetAndroid.Jeu;
 
 import android.app.Activity;
-
-import android.content.res.AssetManager;
 import android.os.Bundle;
-
-import java.io.IOException;
+import com.example.ProjetAndroid.R;
 
 
 public class JeuActivity extends Activity {
 
-    private AssetManager m_assetsListe;
-    XMLDocument XMLcarte;
-    String m_nomCarte = "carte_camp.xml";
-
-
+    private Jeu m_jeu;
+    private String m_nomCarte;
 
     @Override
     public void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jeu);
-        m_assetsListe = getAssets();
-        try {
-            XMLcarte = new XMLDocument(m_nomCarte,m_assetsListe);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        TileSets tilesetCarte = new TileSets(XMLcarte.getNode("tileset_nature"));
-
-
-
-
+        m_jeu =(Jeu) findViewById(R.id.jeu);
+        m_jeu.getNomCarte(m_nomCarte);
 
 
     }

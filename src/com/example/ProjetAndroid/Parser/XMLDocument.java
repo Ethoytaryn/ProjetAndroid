@@ -1,4 +1,4 @@
-package com.example.ProjetAndroid;
+package com.example.ProjetAndroid.Parser;
 
 import android.content.res.AssetManager;
 import org.w3c.dom.Document;
@@ -14,12 +14,11 @@ public class XMLDocument {
     private Document m_doc;
     private AssetManager m_listAssets;
 
-    XMLDocument(String nomFichier, AssetManager listAssets) throws IOException {
+    public XMLDocument(String nomFichier, AssetManager listAssets) throws IOException {
 
         m_nomFichier = nomFichier;
         m_parser = new XMLDOMParser();
         m_listAssets = listAssets;
-
 
         EnregistrerDocument();
 
