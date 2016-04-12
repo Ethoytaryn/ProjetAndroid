@@ -1,15 +1,16 @@
 package com.example.ProjetAndroid.BriqueJeu;
 
+import android.graphics.Rect;
 import org.w3c.dom.Element;
 
 public class TileSet {
 
-    String m_nomTileSet;
-    int m_tilewidth;
-    int m_tileheight;
-    int m_spacing;
+    private String m_nomTileSet;
+    private int m_tilewidth;
+    private int m_tileheight;
+    private int m_spacing;
     int m_tilecount;
-    int m_columns;
+    private int m_columns;
 
     TileSet(Element tileSet){
 
@@ -21,20 +22,44 @@ public class TileSet {
         m_columns = Integer.parseInt(tileSet.getAttribute("columns"));
     }
 
-    public int[] getCoordSprite(int numeroTuile){
-        int[] coord = new int[4];
-        coord[0] = numeroTuile % m_columns; //numeroColonne
-        coord[1] = (numeroTuile-coord[0])/m_columns; //numeroLigne
-        coord[2] = coord[0]*(m_tilewidth+m_spacing);  //pixelX
-        coord[3] = coord[1]*(m_tileheight+m_spacing); //pixelY
-        if(m_nomTileSet == "tileset_nature") {
+    public Rect getCoordSprite(int numeroTuile){
+        Rect coord = new Rect();
 
-            return coord;
-        }
-        return null;
+        int col = (numeroTuile % m_columns)-1;
+        int ligne = numeroTuile / m_columns;
+
+        int left = 1+(col)*2*(m_tilewidth+m_spacing); //numeroColonne
+        int top = 1+ligne*(m_tileheight+m_spacing)*2; //numeroLigne
+        int right = left + (m_tilewidth-m_spacing)*2;  //pixelX
+        int bottom = top + (m_tileheight-m_spacing)*2; //pixelY
+
+        coord.set(left,top,right,bottom);
+        return coord;
+
+
     }
 
     public int getM_tilecount(){
         return m_tilecount;
+    }
+
+    public String getM_nomTileSet() {
+        return m_nomTileSet;
+    }
+
+    public int getM_tilewidth() {
+        return m_tilewidth;
+    }
+
+    public int getM_tileheight() {
+        return m_tileheight;
+    }
+
+    public int getM_spacing() {
+        return m_spacing;
+    }
+
+    public int getM_columns() {
+        return m_columns;
     }
 }

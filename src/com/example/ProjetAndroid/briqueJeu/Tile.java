@@ -1,29 +1,34 @@
 package com.example.ProjetAndroid.BriqueJeu;
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.util.AttributeSet;
-import android.view.View;
-import com.example.ProjetAndroid.R;
+
+import android.graphics.Rect;
+
 
 /**
  * Created by Guillaume on 30/03/2016.
  */
-public class Tile extends View {
+public class Tile {
 
-    TileSet tileSet;
-    int m_numeroTuile;
+    private int m_numeroSprite;
+    private Rect m_coordSprite;
+    private TileSet m_tileset;
 
-    public Tile(Context context, AttributeSet attrs) {
-        super(context, attrs);
+
+    public Tile(int numeroSprite,TileSets listeTileSets) {
+        this.m_numeroSprite = numeroSprite;
+        m_tileset = listeTileSets.getTileSet(m_numeroSprite);
+        m_coordSprite = m_tileset.getCoordSprite(m_numeroSprite);
     }
 
+    public int getM_numeroSprite() {
+        return m_numeroSprite;
+    }
 
-    public void onDraw(Canvas canvas,int[]coord){
-        Drawable tuile = getResources().getDrawable(R.drawable.tileset_nature);
-        tuile.setBounds(coord[0],coord[1],coord[2],coord[3]);
-        tuile.draw(canvas);
+    public Rect getM_coordSprite() {
+        return m_coordSprite;
+    }
 
+    public TileSet getM_tileset() {
+        return m_tileset;
     }
 }
