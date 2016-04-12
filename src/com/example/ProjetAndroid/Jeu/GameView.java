@@ -51,8 +51,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     /** callback lorsque la surface est chargée,
      * donc démarrer la boucle de game_screen*/
-    public void surfaceChanged(SurfaceHolder holder, int format,
-                               int width, int height) {
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         this.width = width;
         this.height = height;
         this.buffer = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
