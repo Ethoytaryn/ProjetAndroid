@@ -18,25 +18,42 @@ import java.util.ArrayList;
 
 public class GameLoop implements Runnable {
 
+
     private boolean running;  // variable arrêt de la boucle
     private long sleepTime = 100;
     private GameView screen; //écran de jeu
-    private MotionEvent lastEvent; // le dernier évenement enregistré sur l'écran
-    private Bitmap m_img;
     private Context m_context; /** contexte de l'application */
+
+    //affichage
+    private int fps;
     private DisplayMetrics m_metrics;
-    private TileMaps m_listeMap;
+
+    //données partie
+    private TileMaps m_listeMaps;
+    private ArrayList<TileMap> m_listeMap;
+    private Bitmap m_img;
+    private Paint paint;
+
+    //evenement et position doigt
+    private MotionEvent lastEvent; // le dernier évenement enregistré sur l'écran
+    private boolean translate;
+    private float positionX = 0;
+    private  float positionY = 0;
+    float x_init = 0;
+    float y_init = 0;
 
 
 
     public void initGame(Context context, DisplayMetrics metrics, TileMaps listeMap)  {
 
         m_metrics=metrics;
-        m_listeMap = listeMap;
+        m_listeMaps = listeMap;
         m_context = context;
         running = true;
         screen = new GameView(m_context, this);
-
+        paint = new Paint();
+        paint.setColor(0xFF000000);
+        m_listeMap = m_listeMaps.getListMap();
     }
 
     /** la boucle de game_screen */
@@ -66,69 +83,93 @@ public class GameLoop implements Runnable {
 
             }
             // calculer le FSP
-            int fps = (int) (1000/(System.currentTimeMillis() - startTime));
+            fps = (int) (1000/(System.currentTimeMillis() - startTime));
         }
     }
 
     /** Dessiner les composant du game_screen sur le buffer de l'écran*/
     public void render() {
 
-        Paint paint = new Paint();
-        paint.setColor(0xFFFFFFFF);
-        screen.canvas.drawPaint(paint);
-
-        int nombretuileparligne = 8;
-
-        ArrayList<TileMap> listeMap = m_listeMap.getListMap();
-        //TileMap couche = listeMap.get(0);
-        for (TileMap couche : listeMap) {
-            ArrayList<Tile> listeTuile = couche.getListTiles();
 
 
-            int ligne = 0;
-            int nbretuiledessiné = 0;
+
+            screen.canvas.drawPaint(paint);
 
 
-            for (Tile aListTuile : listeTuile) {
 
 
-                if (nbretuiledessiné > couche.getM_largeur()-1 ) {
-                    nbretuiledessiné = 0;
-                    ligne++;
+            for (TileMap couche : m_listeMap) {
+                ArrayList<Tile> listeTuile = couche.getListTiles();
+
+
+                int ligne = 0;
+                int nbretuiledessiné = 0;
+
+
+                for (Tile aListTuile : listeTuile) {
+
+
+                    if (nbretuiledessiné > couche.getM_largeur() - 1) {
+                        nbretuiledessiné = 0;
+                        ligne++;
+                    }
+                    Tile tuile = aListTuile;
+                    int resID = m_context.getResources().getIdentifier(tuile.getM_tileset().getM_nomTileSet(), "drawable", m_context.getPackageName());
+                    m_img = ((BitmapDrawable) m_context.getResources().getDrawable(resID)).getBitmap();
+
+                    int largeur = 50;
+
+                    int a = nbretuiledessiné * largeur;
+                    int b = ligne * largeur;
+                    int c = a + largeur;
+                    int d = b + largeur;
+
+
+                    Rect I = new Rect(a, b, c, d);
+                    Rect J = tuile.getM_coordSprite();
+
+                    screen.canvas.drawBitmap(m_img, J, I, null);
+
+                    nbretuiledessiné++;
                 }
-                Tile tuile = aListTuile;
-                int resID = m_context.getResources().getIdentifier(tuile.getM_tileset().getM_nomTileSet(), "drawable", m_context.getPackageName());
-                m_img = ((BitmapDrawable) m_context.getResources().getDrawable(resID)).getBitmap();
 
-                int largeur = 50;
-
-                int a = nbretuiledessiné * largeur ;
-                int b = ligne * largeur;
-                int c = a + largeur;
-                int d = b + largeur;
-
-                Log.d("coordonnée sprite" , " "+a+" "+b+""+c+" "+d);
-                Rect I = new Rect(a, b, c, d);
-                Rect J = tuile.getM_coordSprite();
-
-                screen.canvas.drawBitmap(m_img, J, I, null);
-
-                nbretuiledessiné++;
             }
-
-        }
-        screen.invalidate();
+            screen.invalidate();
     }
 
-    public void update() {
 
+    public void update() {
+        if(translate){
+            screen.canvas.translate(positionX,positionY);
+            positionX = 0;
+            positionY = 0;
+        }
     }
 
     public void processEvents() {
-        if (getLastEvent() != null && getLastEvent().getAction() == MotionEvent.ACTION_DOWN) {
 
+        if (lastEvent != null) {
+
+            if (lastEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                float x_init = lastEvent.getHistoricalX(0);
+                float x = lastEvent.getX();
+
+                float y = lastEvent.getY();
+                Log.d("Detection", "J'ai commence en x = "+x_init);
+                    Log.d("Dectection","Je bouge mon doigt en position "+x + " "+y);
+                    Log.d("Detection", "Il y a une différence de "+(x-x_init));
+                    //positionX = -80;
+                    //translate = true;
+
+
+            }
+            else if (lastEvent.getAction() == MotionEvent.ACTION_UP) {
+                Log.d("Dectection","J'enleve mon doigt");
+                setLastEvent(null);
+                translate = false;
+                positionX = 0;
+            }
         }
-        setLastEvent(null);
     }
 
     public GameView getScreen() {
@@ -142,6 +183,8 @@ public class GameLoop implements Runnable {
     public void setLastEvent(MotionEvent lastEvent) {
         this.lastEvent = lastEvent;
     }
+
+
 }
 
 

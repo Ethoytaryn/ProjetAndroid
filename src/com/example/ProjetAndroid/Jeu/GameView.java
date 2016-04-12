@@ -41,16 +41,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    /**callback lorsque l'écran est touché
-     * on stocke l'événement pour être ensuite traité dans la boucle de game_screen*/
+    //On envoie à la boucle de jeu le dernier evenement
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         game.setLastEvent(event);
         return true;
     }
 
-    /** callback lorsque la surface est chargée,
-     * donc démarrer la boucle de game_screen*/
+    //quand l'activité a démarrer on lance la boucle
     public void surfaceChanged(SurfaceHolder holder, int format,
                                int width, int height) {
         this.width = width;
