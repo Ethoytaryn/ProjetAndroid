@@ -90,13 +90,7 @@ public class GameLoop implements Runnable {
     /** Dessiner les composant du game_screen sur le buffer de l'écran*/
     public void render() {
 
-
-
-
             screen.canvas.drawPaint(paint);
-
-
-
 
             for (TileMap couche : m_listeMap) {
                 ArrayList<Tile> listeTuile = couche.getListTiles();

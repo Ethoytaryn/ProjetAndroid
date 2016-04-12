@@ -1,6 +1,7 @@
 package com.example.ProjetAndroid.BriqueJeu;
 
 import android.graphics.Rect;
+import android.util.Log;
 import org.w3c.dom.Element;
 
 public class TileSet {
@@ -11,8 +12,9 @@ public class TileSet {
     private int m_spacing;
     int m_tilecount;
     private int m_columns;
+    private int m_densityDPI;
 
-    TileSet(Element tileSet){
+    TileSet(Element tileSet, int densityDPI){
 
         m_nomTileSet = tileSet.getAttribute("name");
         m_tilewidth = Integer.parseInt(tileSet.getAttribute("tilewidth"));
@@ -20,6 +22,8 @@ public class TileSet {
         m_spacing = Integer.parseInt(tileSet.getAttribute("spacing"));
         m_tilecount = Integer.parseInt(tileSet.getAttribute("tilecount"));
         m_columns = Integer.parseInt(tileSet.getAttribute("columns"));
+        m_densityDPI = densityDPI;
+
     }
 
     public Rect getCoordSprite(int numeroTuile){
@@ -27,11 +31,12 @@ public class TileSet {
 
         int col = (numeroTuile % m_columns)-1;
         int ligne = numeroTuile / m_columns;
-
-        int left = 1+(col)*2*(m_tilewidth+m_spacing); //numeroColonne
-        int top = 1+ligne*(m_tileheight+m_spacing)*2; //numeroLigne
-        int right = left + (m_tilewidth-m_spacing)*2;  //pixelX
-        int bottom = top + (m_tileheight-m_spacing)*2; //pixelY
+        int coeff = m_densityDPI/160;
+        Log.d("mon coeff", ""+coeff);
+        int left = 1+(col)*(m_tilewidth+m_spacing)*coeff; //numeroColonne
+        int top = 1+ligne*(m_tileheight+m_spacing)*coeff; //numeroLigne
+        int right = left + (m_tilewidth-m_spacing)*coeff;  //pixelX
+        int bottom = top + (m_tileheight-m_spacing)*coeff; //pixelY
 
         coord.set(left,top,right,bottom);
         return coord;

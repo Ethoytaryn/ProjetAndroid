@@ -4,7 +4,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Created by Guillaume on 11/04/2016.

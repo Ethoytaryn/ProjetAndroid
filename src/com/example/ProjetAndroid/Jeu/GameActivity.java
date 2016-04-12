@@ -46,7 +46,7 @@ public class GameActivity extends Activity {
             NodeList elist2 = m_carte.getNode("layer");
 
             //traitement des données
-            listTileSet = new TileSets(elist1);
+            listTileSet = new TileSets(elist1,metrics.densityDpi);
             listTileMap = new TileMaps(elist2,listTileSet);
 
         } catch (IOException e) {
