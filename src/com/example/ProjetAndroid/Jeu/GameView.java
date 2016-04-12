@@ -45,7 +45,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
      * on stocke l'événement pour être ensuite traité dans la boucle de game_screen*/
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        this.game.lastEvent = event;
+        game.setLastEvent(event);
         return true;
     }
 

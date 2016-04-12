@@ -2,7 +2,6 @@ package com.example.ProjetAndroid.BriqueJeu;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
 import java.util.ArrayList;
 
 /**
@@ -10,9 +9,9 @@ import java.util.ArrayList;
  */
 public class TileSets {
 
-    ArrayList<TileSet> listTileSets = new ArrayList<>();
+    private ArrayList<TileSet> listTileSets = new ArrayList<>();
 
-    TileSets(NodeList e){
+    public TileSets(NodeList e){
 
         for(int i=0; i < e.getLength();i++){
             listTileSets.add(new TileSet((Element)e.item(i)));
@@ -21,7 +20,7 @@ public class TileSets {
 
     public TileSet getTileSet(int numeroTuile){
 
-        int nombreTuile = 0;
+        int nombreTuile =0;
         TileSet select = null;
 
         for (TileSet a : listTileSets) {
@@ -34,5 +33,4 @@ public class TileSets {
         return select;
 
     }
-
 }
