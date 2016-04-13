@@ -16,6 +16,7 @@ import com.example.ProjetAndroid.BriqueJeu.TileMaps;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.regex.Matcher;
 
 
 public class GameLoop implements Runnable {
@@ -38,17 +39,18 @@ public class GameLoop implements Runnable {
     private Paint paint;
 
     //evenement et position doigt
-    private boolean m_motion;
     private MotionEvent lastEvent; // le dernier évenement enregistré sur l'écran
-    private float positionX = 0;
+
     private  float positionY = 0;
+    private float tailleMax = 50*40;
+    private float DeltaX = 0;
+    private float translationX = 0;
 
 
 
 
     public void initGame(Context context, Assembleur assembleur)  {
 
-        m_motion = true;
         m_assembleur = assembleur;
         m_tableauObjet = assembleur.getTableau();
         m_context = context;
@@ -93,7 +95,6 @@ public class GameLoop implements Runnable {
     /** Dessiner les composant du game_screen sur le buffer de l'écran*/
     public void render() {
 
-        if (m_motion) {
             screen.canvas.drawPaint(paint);
 
             for (int i = 0; i < 30; i++) {
@@ -115,23 +116,30 @@ public class GameLoop implements Runnable {
                         Rect I = new Rect(a, b, c, d);
                         Rect J = temp.getM_coordSprite();
 
-                        screen.canvas.drawBitmap(m_img, J, I, null);
+                        if(a<screen.width+Math.abs(DeltaX) && c > Math.abs(DeltaX)){
+                            screen.canvas.drawBitmap(m_img, J, I, null);
+                        }
 
                     }
 
                 }
             }
-
             screen.invalidate();
-            m_motion = false;
-        }
+
+
     }
 
     public void update() {
-        if(m_motion){
-            screen.canvas.translate(positionX,positionY);
-            positionX = 0;
-            positionY = 0;
+        if(DeltaX<=0 && DeltaX > -500) {
+
+            screen.canvas.translate(translationX, positionY);
+            DeltaX += translationX;
+            translationX = 0;
+            Log.d("Afficher delta",""+DeltaX);
+        }
+        else
+        {
+
         }
     }
 
@@ -139,9 +147,20 @@ public class GameLoop implements Runnable {
 
         if (lastEvent != null) {
             if(lastEvent.getAction()==MotionEvent.ACTION_UP){
-                Log.d("Detection","J'ai cliquez une fois");
+                Log.d("INPUT","J'ai appuyé sur l'écran");
+                translationX = -10;
             }
-            if (lastEvent.getAction() == MotionEvent.ACTION_MOVE) {
+
+            if(lastEvent.getAction()==MotionEvent.ACTION_MOVE){
+                translationX = 10;
+                Log.d("INPUT","J'ai le doigt ur l'écran l'écran");
+                
+                Log.d("Coordonnée du doigt",""+lastEvent.getX()+" ");
+            }
+            lastEvent = null;
+
+
+            /*if (lastEvent.getAction() == MotionEvent.ACTION_MOVE) {
                 float x_init = lastEvent.getHistoricalX(0);
                 float x = lastEvent.getX();
 
@@ -157,9 +176,9 @@ public class GameLoop implements Runnable {
             else if (lastEvent.getAction() == MotionEvent.ACTION_UP) {
                 Log.d("Dectection","J'enleve mon doigt");
                 setLastEvent(null);
-                translate = false;
+                m_motion = false;
                 positionX = 0;
-            }
+            }*/
         }
     }
 
