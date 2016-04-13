@@ -1,7 +1,6 @@
 package com.example.ProjetAndroid.BriqueJeu;
-
-
 import android.graphics.Rect;
+
 
 
 /**

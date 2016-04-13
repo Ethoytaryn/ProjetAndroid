@@ -2,6 +2,8 @@
 <resources>
     <string name="app_name">ProjetAndroid</string>
 
+    <string name="classeTile">com.example.ProjetAndroid.BriqueJeu.Tile</string>
+
     <style name="ButtonText">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>

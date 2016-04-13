@@ -9,6 +9,7 @@ import com.example.ProjetAndroid.BriqueJeu.Sprite;
  * Created by maël on 06/04/2016.
  */
 public class CharacterLoop extends Thread {
+
     public boolean running;
 
     boolean isMoving = false;

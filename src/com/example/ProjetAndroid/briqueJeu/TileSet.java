@@ -32,7 +32,6 @@ public class TileSet {
         int col = (numeroTuile % m_columns)-1;
         int ligne = numeroTuile / m_columns;
         int coeff = m_densityDPI/160;
-        Log.d("mon coeff", ""+coeff);
         int left = 1+(col)*(m_tilewidth+m_spacing)*coeff; //numeroColonne
         int top = 1+ligne*(m_tileheight+m_spacing)*coeff; //numeroLigne
         int right = left + (m_tilewidth-m_spacing)*coeff;  //pixelX
