@@ -27,9 +27,7 @@ public class TileMap {
 
 
         for(int i=0; i < tuiles.getLength();i++){
-
             Element tuile = (Element) tuiles.item(i);
-
             int nmrTuile = Integer.parseInt(tuile.getAttribute("gid"));
             listTiles.add(new Tile(nmrTuile,listeTileSets));
         }

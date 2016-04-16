@@ -15,7 +15,6 @@ public class TileMaps {
     public TileMaps(NodeList listLayer, TileSets listeTileSets){
 
         for(int i=0; i < listLayer.getLength();i++){
-
             getListMap().add(new TileMap((Element)listLayer.item(i),listeTileSets));
         }
     }

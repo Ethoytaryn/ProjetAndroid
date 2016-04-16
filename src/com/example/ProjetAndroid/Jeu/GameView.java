@@ -14,7 +14,7 @@ import android.view.SurfaceView;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 
-    public int width; //largeur de l'écran
+    public int width; //m_largeurTile de l'écran
     public int height; //hauteur de l'écran
     public Canvas canvas; //outil pour dessiner sur l'écran
     private Bitmap buffer; // pixel buffer
@@ -29,7 +29,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.game = game;
     }
 
-    /** Rafraichir l'écran*/
+    /** Rafraichir l'écran**/
     @Override
     public void invalidate() {
         if (holder != null) {

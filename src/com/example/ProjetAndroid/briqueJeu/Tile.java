@@ -1,6 +1,9 @@
 package com.example.ProjetAndroid.BriqueJeu;
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
-
+import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 
 
 /**
@@ -9,25 +12,36 @@ import android.graphics.Rect;
 public class Tile {
 
     private int m_numeroSprite;
-    private Rect m_coordSprite;
     private TileSet m_tileset;
+    private boolean m_getASprite;
+    private Bitmap m_bitmap;
 
+    public Tile(int numeroSprite, TileSets listeTileSets) {
 
-    public Tile(int numeroSprite,TileSets listeTileSets) {
-        this.m_numeroSprite = numeroSprite;
+        m_numeroSprite = numeroSprite;
         m_tileset = listeTileSets.getTileSet(m_numeroSprite);
-        m_coordSprite = m_tileset.getCoordSprite(m_numeroSprite);
+
+        if (numeroSprite !=0){
+            m_getASprite = true;
+
+            m_bitmap = m_tileset.getBitMap(m_numeroSprite);
+        }
+        else
+        {
+
+            m_getASprite = false;
+        }
+
     }
 
-    public int getM_numeroSprite() {
+    public int getNumeroSprite(){
         return m_numeroSprite;
     }
-
-    public Rect getM_coordSprite() {
-        return m_coordSprite;
+    public Bitmap getBitmap(){
+        return m_bitmap;
     }
 
-    public TileSet getM_tileset() {
-        return m_tileset;
+    public boolean getASpite() {
+        return m_getASprite;
     }
 }

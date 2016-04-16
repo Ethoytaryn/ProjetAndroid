@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import com.example.ProjetAndroid.BriqueJeu.*;
 import com.example.ProjetAndroid.Parser.XMLDocument;
+import com.example.ProjetAndroid.R;
 import org.w3c.dom.NodeList;
 
 
@@ -49,7 +51,7 @@ public class GameActivity extends Activity {
 
             //traitement des données
             m_assembleur = new Assembleur(m_metrics);
-            m_assembleur.getInfoTileSet(elist1).getInfoMap(elist2);
+            m_assembleur.getInfoTileSet(elist1,this).getInfoMap(elist2);
 
         } catch (IOException e) {
             e.printStackTrace();

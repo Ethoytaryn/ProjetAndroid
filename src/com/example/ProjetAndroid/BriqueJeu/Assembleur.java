@@ -1,5 +1,6 @@
 package com.example.ProjetAndroid.BriqueJeu;
 
+import android.content.Context;
 import android.util.DisplayMetrics;
 import org.w3c.dom.NodeList;
 
@@ -22,8 +23,8 @@ public class Assembleur {
         créationDuTableau();
     }
 
-    public Assembleur getInfoTileSet(NodeList infoTileSet){
-        m_listTileSet = new TileSets(infoTileSet,m_metric.densityDpi);
+    public Assembleur getInfoTileSet(NodeList infoTileSet, Context context){
+        m_listTileSet = new TileSets(infoTileSet,m_metric.densityDpi,context);
         return this;
     }
 

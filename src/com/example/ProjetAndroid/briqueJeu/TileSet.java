@@ -1,7 +1,8 @@
 package com.example.ProjetAndroid.BriqueJeu;
 
-import android.graphics.Rect;
-import android.util.Log;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import org.w3c.dom.Element;
 
 public class TileSet {
@@ -13,8 +14,9 @@ public class TileSet {
     int m_tilecount;
     private int m_columns;
     private int m_densityDPI;
+    private Bitmap m_imgSource;
 
-    TileSet(Element tileSet, int densityDPI){
+    TileSet(Element tileSet, int densityDPI, Context context){
 
         m_nomTileSet = tileSet.getAttribute("name");
         m_tilewidth = Integer.parseInt(tileSet.getAttribute("tilewidth"));
@@ -23,24 +25,32 @@ public class TileSet {
         m_tilecount = Integer.parseInt(tileSet.getAttribute("tilecount"));
         m_columns = Integer.parseInt(tileSet.getAttribute("columns"));
         m_densityDPI = densityDPI;
+        getImgSource(context);
 
     }
 
-    public Rect getCoordSprite(int numeroTuile){
-        Rect coord = new Rect();
+    private void getImgSource(Context context){
+        int resID = context.getResources().getIdentifier(m_nomTileSet, "drawable", context.getPackageName());
+        m_imgSource = ((BitmapDrawable) context.getResources().getDrawable(resID)).getBitmap();
+    }
+
+    public Bitmap getBitMap(int numeroSprite){
+        int[] coord = getCoordSprite(numeroSprite);
+        return Bitmap.createBitmap(m_imgSource,coord[0],coord[1],coord[2],coord[3]);
+    }
+
+    public int[] getCoordSprite(int numeroTuile){
+        int[] coord = new int[4];
 
         int col = (numeroTuile % m_columns)-1;
         int ligne = numeroTuile / m_columns;
         int coeff = m_densityDPI/160;
-        int left = 1+(col)*(m_tilewidth+m_spacing)*coeff; //numeroColonne
-        int top = 1+ligne*(m_tileheight+m_spacing)*coeff; //numeroLigne
-        int right = left + (m_tilewidth-m_spacing)*coeff;  //pixelX
-        int bottom = top + (m_tileheight-m_spacing)*coeff; //pixelY
+        coord[0] = 1+(col)*(m_tilewidth+m_spacing)*coeff; //numeroColonne
+        coord[1] = 1+ligne*(m_tileheight+m_spacing)*coeff; //numeroLigne
+        coord[2] = (m_tilewidth-m_spacing)*coeff;  //pixelX
+        coord[3] = (m_tileheight-m_spacing)*coeff; //pixelY
 
-        coord.set(left,top,right,bottom);
         return coord;
-
-
     }
 
     public int getM_tilecount(){

@@ -1,5 +1,6 @@
 package com.example.ProjetAndroid.BriqueJeu;
 
+import android.content.Context;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import java.util.ArrayList;
@@ -11,10 +12,10 @@ public class TileSets {
 
     private ArrayList<TileSet> listTileSets = new ArrayList<>();
 
-    public TileSets(NodeList e, int densityDPI){
+    public TileSets(NodeList e, int densityDPI, Context context){
 
         for(int i=0; i < e.getLength();i++){
-            listTileSets.add(new TileSet((Element)e.item(i),densityDPI));
+            listTileSets.add(new TileSet((Element)e.item(i),densityDPI,context));
         }
     }
 
