@@ -2,9 +2,7 @@ package com.example.ProjetAndroid.Jeu;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.MotionEvent;
 import com.example.ProjetAndroid.BriqueJeu.Assembleur;
@@ -17,8 +15,8 @@ import java.util.ArrayList;
 public class GameLoop implements Runnable {
 
 
-    private boolean running;  // variable arrêt de la boucle
-    private long sleepTime = 10;
+    private boolean m_running;  // variable arrêt de la boucle
+    private long m_sleepTime = 10;
     private Context m_context;
 
     //affichage
@@ -50,10 +48,9 @@ public class GameLoop implements Runnable {
         m_tableauObjet = assembleur.getTableau();
         m_nbreTile = 1200;
         m_context = context;
-        running = true;
+        m_running = true;
         screen = new GameView(m_context, this);
         m_largeurTile = 50;
-
         m_coordTileCanvas = new Rect[30][40];
         positionDesTuiles();
 
@@ -69,7 +66,7 @@ public class GameLoop implements Runnable {
 
         render();
 
-        while (running) {
+        while (m_running) {
 
             startTime = System.currentTimeMillis();
 
@@ -80,7 +77,7 @@ public class GameLoop implements Runnable {
 
 
             elapsedTime = System.currentTimeMillis() - startTime;
-            sleepCorrected = sleepTime - elapsedTime;
+            sleepCorrected = m_sleepTime - elapsedTime;
 
             // si jamais sleepCorrected<0 alors faire une pause de 1 ms
             if (sleepCorrected < 0) {
@@ -105,33 +102,36 @@ public class GameLoop implements Runnable {
                    Rect I = m_coordTileCanvas[i][j];
 
                    ArrayList listeTuile = m_tableauObjet[i][j];
+
                    for (Object tile : listeTuile) {
                        Tile tuile = (Tile) tile;
 
 
                        if (tuile.getASpite()) {
 
-                           if (I.right > (Math.abs(XEcran) - m_largeurTile) || I.left < Math.abs(XEcran) + screen.width || I.top > Math.abs(YEcran) - m_largeurTile || I.bottom < Math.abs(YEcran) + screen.height)
-                               screen.canvas.drawBitmap(tuile.getBitmap(), null, I, null);
+                           if (I.right > (Math.abs(XEcran) - m_largeurTile) || I.left < Math.abs(XEcran) + screen.getM_Width() || I.top > Math.abs(YEcran) - m_largeurTile || I.bottom < Math.abs(YEcran) + screen.getM_height())
+                               screen.getCanva().drawBitmap(tuile.getBitmap(), null, I, null);
 
                        }
                    }
                }
            }
+
+
             screen.invalidate();
     }
 
     public void update() {
 
-            if (XEcran + translateX <= 0 && (XEcran - screen.width + translateX) > (-50 * 40)) {
+            if (XEcran + translateX <= 0 && (XEcran - screen.getM_Width() + translateX) > (-50 * 40)) {
                 XEcran += translateX;
-                screen.canvas.translate(translateX, 0);
+                screen.getCanva().translate(translateX, 0);
                 translateX = 0;
             }
 
-            if (YEcran + translateY <= 0 && YEcran - screen.height + translateY > (-50 * 30)) {
+            if (YEcran + translateY <= 0 && YEcran - screen.getM_height() + translateY > (-50 * 30)) {
                 YEcran += translateY;
-                screen.canvas.translate(0, translateY);
+                screen.getCanva().translate(0, translateY);
                 translateY = 0;
             }
 

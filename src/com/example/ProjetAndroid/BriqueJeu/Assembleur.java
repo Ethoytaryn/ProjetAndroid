@@ -10,13 +10,12 @@ import java.util.ArrayList;
  * Created by Guillaume on 13/04/2016.
  */
 public class Assembleur {
-    TileSets m_listTileSet;
-    TileMaps m_listTileMap;
-    DisplayMetrics m_metric;
 
+    private TileSets m_listTileSet;
+    private TileMaps m_listTileMap;
+    private DisplayMetrics m_metric;
     private ArrayList[][] m_tableau;
-    private int m_widthMap;
-    private int m_heightMap;
+
 
     public Assembleur(DisplayMetrics metrics){
         m_metric = metrics;
@@ -61,11 +60,4 @@ public class Assembleur {
         return m_tableau;
     }
 
-    public int getM_widthMap() {
-        return m_widthMap;
-    }
-
-    public int getM_heightMap() {
-        return m_heightMap;
-    }
 }

@@ -6,23 +6,20 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 import com.example.ProjetAndroid.BriqueJeu.*;
 import com.example.ProjetAndroid.Parser.XMLDocument;
-import com.example.ProjetAndroid.R;
 import org.w3c.dom.NodeList;
-
-
 import java.io.IOException;
 
 
 public class GameActivity extends Activity {
 
-    private GameLoop m_gameLoop;
-    private DisplayMetrics m_metrics;
+    private GameLoop m_gameLoop; //mon Thread
+    private DisplayMetrics m_metrics; //information sur l'écran
     private String m_nomCarte = "carte_camp.xml";
     private XMLDocument m_carte;
     private Assembleur m_assembleur;
+
 
 
     @Override
@@ -60,7 +57,6 @@ public class GameActivity extends Activity {
         m_gameLoop = new GameLoop();
         m_gameLoop.initGame(this,m_assembleur);
         setContentView(m_gameLoop.getScreen());
-
     }
 
     @Override

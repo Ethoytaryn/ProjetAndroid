@@ -54,7 +54,7 @@ public class CharacterLoop extends Thread {
         lastEvent = null;
     }
     public void render( GameView screen) {
-        this.character.render(screen.canvas);
+        this.character.render(screen.getCanva());
         // appliquer le buffer à l'écran
         screen.invalidate();
     }
