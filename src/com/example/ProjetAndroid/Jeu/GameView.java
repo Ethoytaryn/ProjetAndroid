@@ -74,6 +74,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public int getM_Width(){
         return m_width;
     }
+
     public int getM_height(){
         return m_height;
     }

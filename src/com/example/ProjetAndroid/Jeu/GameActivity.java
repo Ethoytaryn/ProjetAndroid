@@ -10,6 +10,7 @@ import com.example.ProjetAndroid.BriqueJeu.*;
 import com.example.ProjetAndroid.Parser.XMLDocument;
 import org.w3c.dom.NodeList;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class GameActivity extends Activity {
@@ -46,9 +47,21 @@ public class GameActivity extends Activity {
             NodeList elist1 = m_carte.getNode("tileset");
             NodeList elist2 = m_carte.getNode("layer");
 
+            int[] coord = new int[4];
+            coord[0] = 0;
+            coord[1] = 2*(64*2);
+            coord[2] = 64*2;
+            coord[3] = 64*2;
+            Personnage premierPerso = new Personnage();
+            premierPerso.getImgSource(this).setSprite(coord);
+
+            Personnages listPerso = new Personnages();
+            int[] position ={15,10};
+            listPerso.addPerso(premierPerso,position);
+
             //traitement des données
             m_assembleur = new Assembleur(m_metrics);
-            m_assembleur.getInfoTileSet(elist1,this).getInfoMap(elist2);
+            m_assembleur.getInfoTileSet(elist1,this).getInfoMap(elist2).getInfoPerso(listPerso);
 
         } catch (IOException e) {
             e.printStackTrace();

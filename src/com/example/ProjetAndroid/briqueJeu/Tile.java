@@ -16,6 +16,9 @@ public class Tile {
     private boolean m_getASprite;
     private Bitmap m_bitmap;
 
+    public Tile(){
+    }
+
     public Tile(int numeroSprite, TileSets listeTileSets) {
 
         m_numeroSprite = numeroSprite;

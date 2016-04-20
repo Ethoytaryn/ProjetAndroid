@@ -1,11 +1,11 @@
 package com.example.ProjetAndroid.Jeu;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
 import com.example.ProjetAndroid.BriqueJeu.Assembleur;
+import com.example.ProjetAndroid.BriqueJeu.Personnage;
 import com.example.ProjetAndroid.BriqueJeu.Tile;
 
 
@@ -30,7 +30,6 @@ public class GameLoop implements Runnable {
     private ArrayList[][] m_tableauObjet;
     private int m_nbreTile;
     private Rect[][] m_coordTileCanvas;
-    private Bitmap m_img;
 
     //evenement et position doigt
     private MotionEvent lastEvent; // le dernier évenement enregistré sur l'écran
@@ -40,7 +39,9 @@ public class GameLoop implements Runnable {
     float y_frame_précédente = 0;
     private float translateX = 0;
     private float translateY = 0;
-
+    private int m_pos_clic_X;
+    private int m_pos_clic_Y;
+    private boolean maj = true;
 
 
     public void initGame(Context context, Assembleur assembleur)  {
@@ -90,38 +91,50 @@ public class GameLoop implements Runnable {
             }
             // calculer le FSP
             fps = (int) (1000/(System.currentTimeMillis() - startTime));
-            Log.d("FPS",""+fps);
         }
     }
 
     public void render() {
 
+        if(maj){
            for (int i = 0; i < 30; i++) {
                for (int j = 0; j < 40; j++) {
 
                    Rect I = m_coordTileCanvas[i][j];
 
-                   ArrayList listeTuile = m_tableauObjet[i][j];
+                   ArrayList listeObjet = m_tableauObjet[i][j];
 
-                   for (Object tile : listeTuile) {
-                       Tile tuile = (Tile) tile;
+                   for (Object o : listeObjet) {
+                       Tile tile = new Tile();
+                       Personnage bob = new Personnage();
 
 
-                       if (tuile.getASpite()) {
+                       if (o.getClass() == tile. getClass())
+                           tile = (Tile) o;
+                           if(tile.getASpite()) {
 
                            if (I.right > (Math.abs(XEcran) - m_largeurTile) || I.left < Math.abs(XEcran) + screen.getM_Width() || I.top > Math.abs(YEcran) - m_largeurTile || I.bottom < Math.abs(YEcran) + screen.getM_height())
-                               screen.getCanva().drawBitmap(tuile.getBitmap(), null, I, null);
+                               screen.getCanva().drawBitmap(tile.getBitmap(), null, I, null);
 
                        }
+                       else if(o.getClass() == bob.getClass()){
+                               bob = (Personnage) o;
+
+                               screen.getCanva().drawBitmap(bob.getSprite(),null,I,null);
+                           }
                    }
                }
            }
 
 
             screen.invalidate();
+
+        }
     }
 
     public void update() {
+
+
 
             if (XEcran + translateX <= 0 && (XEcran - screen.getM_Width() + translateX) > (-50 * 40)) {
                 XEcran += translateX;
@@ -139,10 +152,39 @@ public class GameLoop implements Runnable {
 
     public void processEvents() {
 
-
         if(lastEvent != null) {
+            if(lastEvent.getAction() == MotionEvent.ACTION_DOWN){
 
-            if (lastEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                float x_actuel = lastEvent.getX();
+                float y_actuel = lastEvent.getY();
+
+                float x_total = Math.abs(XEcran)+x_actuel;
+                float y_total = Math.abs(YEcran)+y_actuel;
+
+                m_pos_clic_X =(int) x_total / m_largeurTile;
+                m_pos_clic_Y = (int) y_total/ m_largeurTile;
+
+                lastEvent = null;
+                ArrayList test = m_tableauObjet[m_pos_clic_Y][m_pos_clic_X];
+                Personnage bob = new Personnage();
+                Tile ref = new Tile();
+                Boolean persoClic = false;
+                for(Object tile: test){
+                    if(tile.getClass() == bob.getClass()){
+                        persoClic = true;
+                    }
+                }
+                if(!persoClic){
+
+                        Log.d("Test","Pas de personnage");
+
+                }
+                else {
+                    Log.d("Test", "Tu clique sur un perso");
+                }
+                maj = true;
+            }
+            else if (lastEvent.getAction() == MotionEvent.ACTION_MOVE) {
                 float x_actuel = lastEvent.getX();
                 float y_actuel = lastEvent.getY();
 
@@ -161,17 +203,20 @@ public class GameLoop implements Runnable {
                 y_frame_précédente = y_actuel;
 
             }
-
-            if (lastEvent.getAction() == MotionEvent.ACTION_UP) {
+            else if (lastEvent.getAction() == MotionEvent.ACTION_UP) {
                 x_frame_précédente = 0;
                 y_frame_précédente = 0;
                 translateX = 0;
                 translateY = 0;
+                m_pos_clic_X = 0;
+                m_pos_clic_Y = 0;
                 lastEvent = null;
+                maj = false;
             }
         }
 
     }
+
      private void positionDesTuiles(){
 
          for (int i = 0; i < 30; i++) {
