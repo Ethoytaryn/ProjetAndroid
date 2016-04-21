@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import com.example.ProjetAndroid.BriqueJeu.Assembleur;
 import com.example.ProjetAndroid.BriqueJeu.Personnage;
+import com.example.ProjetAndroid.BriqueJeu.Personnages;
 import com.example.ProjetAndroid.BriqueJeu.Tile;
 
 
@@ -13,8 +14,8 @@ import java.util.ArrayList;
 
 
 public class GameLoop implements Runnable {
-
-
+    Personnages listPerso;
+    Personnage bob;
     private boolean m_running;  // variable arrêt de la boucle
     private long m_sleepTime = 10;
     private Context m_context;
@@ -23,7 +24,6 @@ public class GameLoop implements Runnable {
     private int fps;
     private GameView screen; //écran de jeu
     int m_largeurTile;
-
 
     //données partie
 
@@ -35,17 +35,17 @@ public class GameLoop implements Runnable {
     private MotionEvent lastEvent; // le dernier évenement enregistré sur l'écran
     private float XEcran = 0;
     private float YEcran = 0;
-    float x_frame_précédente = 0;
-    float y_frame_précédente = 0;
-    private float translateX = 0;
-    private float translateY = 0;
+    float x_frame_précédente;
+    float y_frame_précédente;
+    private float translateX;
+    private float translateY;
     private int m_pos_clic_X;
     private int m_pos_clic_Y;
-    private boolean maj = true;
-
+    private boolean maj;
+    Boolean persoClic;
 
     public void initGame(Context context, Assembleur assembleur)  {
-
+        initAction();
         m_tableauObjet = assembleur.getTableau();
         m_nbreTile = 1200;
         m_context = context;
@@ -54,7 +54,12 @@ public class GameLoop implements Runnable {
         m_largeurTile = 50;
         m_coordTileCanvas = new Rect[30][40];
         positionDesTuiles();
-
+        persoClic = false;
+        maj = true;
+        bob = new Personnage();
+        int pos[] = {1,1};
+        listPerso = new Personnages();
+        listPerso.addPerso(bob,pos);
     }
 
     /** la boucle de game_screen */
@@ -106,9 +111,6 @@ public class GameLoop implements Runnable {
 
                    for (Object o : listeObjet) {
                        Tile tile = new Tile();
-                       Personnage bob = new Personnage();
-
-
                        if (o.getClass() == tile. getClass())
                            tile = (Tile) o;
                            if(tile.getASpite()) {
@@ -133,9 +135,6 @@ public class GameLoop implements Runnable {
     }
 
     public void update() {
-
-
-
             if (XEcran + translateX <= 0 && (XEcran - screen.getM_Width() + translateX) > (-50 * 40)) {
                 XEcran += translateX;
                 screen.getCanva().translate(translateX, 0);
@@ -166,9 +165,8 @@ public class GameLoop implements Runnable {
 
                 lastEvent = null;
                 ArrayList test = m_tableauObjet[m_pos_clic_Y][m_pos_clic_X];
-                Personnage bob = new Personnage();
                 Tile ref = new Tile();
-                Boolean persoClic = false;
+                persoClic = false;
                 for(Object tile: test){
                     if(tile.getClass() == bob.getClass()){
                         persoClic = true;
@@ -204,19 +202,21 @@ public class GameLoop implements Runnable {
 
             }
             else if (lastEvent.getAction() == MotionEvent.ACTION_UP) {
-                x_frame_précédente = 0;
-                y_frame_précédente = 0;
-                translateX = 0;
-                translateY = 0;
-                m_pos_clic_X = 0;
-                m_pos_clic_Y = 0;
-                lastEvent = null;
-                maj = false;
+                initAction();
             }
         }
-
     }
-
+    // initialisation des attributs de mouvement
+    public void initAction(){
+        x_frame_précédente = 0;
+        y_frame_précédente = 0;
+        translateX = 0;
+        translateY = 0;
+        m_pos_clic_X = 0;
+        m_pos_clic_Y = 0;
+        lastEvent = null;
+        maj = false;
+    }
      private void positionDesTuiles(){
 
          for (int i = 0; i < 30; i++) {
@@ -240,6 +240,12 @@ public class GameLoop implements Runnable {
 
     public void setLastEvent(MotionEvent lastEvent) {
         this.lastEvent = lastEvent;
+    }
+    public void deplacementPerso(){
+
+        if(persoClic && lastEvent.getAction() == MotionEvent.ACTION_MOVE){
+
+        }
     }
 
 

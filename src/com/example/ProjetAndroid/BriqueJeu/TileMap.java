@@ -31,9 +31,6 @@ public class TileMap {
             int nmrTuile = Integer.parseInt(tuile.getAttribute("gid"));
             listTiles.add(new Tile(nmrTuile,listeTileSets));
         }
-
-
-
     }
 
 
