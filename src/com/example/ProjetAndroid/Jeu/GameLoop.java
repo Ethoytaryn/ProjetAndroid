@@ -12,8 +12,6 @@ import java.util.ArrayList;
 
 
 public class GameLoop implements Runnable {
-
-
     private boolean m_running;  // variable arrêt de la boucle
     private long m_sleepTime = 10;
     private Context m_context;
@@ -22,7 +20,6 @@ public class GameLoop implements Runnable {
     private int fps;
     private GameView screen; //écran de jeu
     int m_largeurTile;
-
 
     //données partie
 
@@ -46,7 +43,6 @@ public class GameLoop implements Runnable {
 
 
     public void initGame(Context context, Assembleur assembleur)  {
-
         m_tableauObjet = assembleur.getTableau();
         m_nbreTile = 1200;
         m_context = context;
@@ -121,11 +117,9 @@ public class GameLoop implements Runnable {
            }
             screen.invalidate();
 
-
     }
 
     public void update() {
-
 
             if(m_clickOnPerso) {
                 Personnage bob = findPersonnage(m_caseSelectionner);
@@ -172,12 +166,9 @@ public class GameLoop implements Runnable {
             float x_total = Math.abs(XEcran)+x_actuel;
             float y_total = Math.abs(YEcran)+y_actuel;
 
-
             m_clic_colonne =(int) x_total / m_largeurTile;
             m_clic_ligne = (int) y_total/ m_largeurTile;
-
-
-
+            
             if(lastEvent.getAction() == MotionEvent.ACTION_DOWN){
 
                 m_caseSelectionner = m_tableauObjet[m_clic_ligne][m_clic_colonne];
@@ -205,6 +196,7 @@ public class GameLoop implements Runnable {
             }
             else if (lastEvent.getAction() == MotionEvent.ACTION_UP) {
 
+
                 x_frame_précédente = 0;
                 y_frame_précédente = 0;
                 translateX = 0;
@@ -215,7 +207,6 @@ public class GameLoop implements Runnable {
             }
             lastEvent = null;
         }
-
     }
 
      private void positionDesTuiles(){
@@ -285,9 +276,6 @@ public class GameLoop implements Runnable {
         }
 
     }
-
-
-
 
     private Personnage findPersonnage(ArrayList<ElementJeu> caseSelect) {
         Personnage bob = new Personnage();
