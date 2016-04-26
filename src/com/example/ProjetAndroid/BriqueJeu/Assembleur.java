@@ -44,6 +44,7 @@ public class Assembleur {
     public Assembleur getInfoMap(NodeList infoMap){
         m_listTileMap = new TileMaps(infoMap,m_listTileSet);
         remplirTableau();
+        ajoutElementDeplacement();
         return this;
     }
 
@@ -51,7 +52,7 @@ public class Assembleur {
         m_tableau = new ArrayList[30][40];
         for(int i = 0; i < 30; i++){
             for(int j = 0; j < 40; j++){
-                m_tableau[i][j] = new ArrayList();
+                m_tableau[i][j] = new <ElementJeu> ArrayList();
             }
         }
     }
@@ -71,7 +72,15 @@ public class Assembleur {
             }
         }
 
+    }
 
+    private void ajoutElementDeplacement(){
+        for(int i = 0; i< 30; i++){
+            for(int j = 0; j < 40; j++){
+
+                m_tableau[i][j].add(new Deplacement());
+            }
+        }
     }
 
     public ArrayList[][] getTableau() {
