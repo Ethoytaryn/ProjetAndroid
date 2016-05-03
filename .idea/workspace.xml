@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AndroidLayouts">
-    <shared>
-      <config />
-    </shared>
-  </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -13,16 +8,17 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ProjetAndroid/ProjetAndroid.apk" afterPath="$PROJECT_DIR$/out/production/ProjetAndroid/ProjetAndroid.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ProjetAndroid/ProjetAndroid.unaligned.apk" afterPath="$PROJECT_DIR$/out/production/ProjetAndroid/ProjetAndroid.unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/BriqueJeu/Assembleur.class" afterPath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/BriqueJeu/Assembleur.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/BriqueJeu/Deplacement.class" afterPath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/BriqueJeu/Deplacement.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/BriqueJeu/Personnage.class" afterPath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/BriqueJeu/Personnage.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/BriqueJeu/Personnages.class" afterPath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/BriqueJeu/Personnages.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/BriqueJeu/TileMap.class" afterPath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/BriqueJeu/TileMap.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/Jeu/GameActivity.class" afterPath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/Jeu/GameActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/Jeu/GameLoop.class" afterPath="$PROJECT_DIR$/out/production/ProjetAndroid/com/example/ProjetAndroid/Jeu/GameLoop.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.properties" afterPath="$PROJECT_DIR$/project.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Assembleur.java" afterPath="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Assembleur.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Deplacement.java" afterPath="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Deplacement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/ElementJeu.java" afterPath="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/ElementJeu.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Personnage.java" afterPath="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Personnage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Personnages.java" afterPath="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Personnages.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/ProjetAndroid/Jeu/GameActivity.java" afterPath="$PROJECT_DIR$/src/com/example/ProjetAndroid/Jeu/GameActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/ProjetAndroid/Jeu/GameLoop.java" afterPath="$PROJECT_DIR$/src/com/example/ProjetAndroid/Jeu/GameLoop.java" />
     </list>
     <ignored path="ProjetAndroid.iws" />
@@ -45,16 +41,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GameLoop.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameLoop.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/Jeu/GameLoop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.908686">
-              <caret line="81" column="26" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="196" column="17" selection-start-line="196" selection-start-column="17" selection-end-line="196" selection-end-column="17" />
               <folding>
-                <element signature="method#positionDesTuiles#0;class#GameLoop#0" expanded="false" />
-                <element signature="method#findPersoActif#0;class#GameLoop#0" expanded="false" />
-                <element signature="method#setDrawableDeplacement#0;class#GameLoop#0" expanded="false" />
+                <element signature="e#7351#7352#0" expanded="true" />
+                <element signature="e#7380#7381#0" expanded="true" />
+                <element signature="e#7869#7870#0" expanded="true" />
+                <element signature="e#7911#7912#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.1015118">
+              <caret line="30" column="67" selection-start-line="30" selection-start-column="67" selection-end-line="30" selection-end-column="67" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -63,7 +70,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Assembleur.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="88" column="78" selection-start-line="88" selection-start-column="78" selection-end-line="88" selection-end-column="78" />
+              <caret line="87" column="78" selection-start-line="87" selection-start-column="78" selection-end-line="87" selection-end-column="78" />
               <folding>
                 <element signature="method#getInfoTileSet#0;class#Assembleur#0" expanded="false" />
               </folding>
@@ -112,10 +119,9 @@
         <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Personnage.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="77" column="38" selection-start-line="77" selection-start-column="38" selection-end-line="77" selection-end-column="38" />
+              <caret line="80" column="9" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#getImgSource#0;class#Personnage#0" expanded="false" />
                 <element signature="method#setSprite#0;class#Personnage#0" expanded="false" />
               </folding>
             </state>
@@ -126,10 +132,12 @@
         <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Personnages.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="58" column="102" selection-start-line="58" selection-start-column="88" selection-end-line="58" selection-end-column="102" />
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
                 <element signature="e#590#591#0" expanded="true" />
                 <element signature="e#625#626#0" expanded="true" />
+                <element signature="e#674#675#0" expanded="true" />
+                <element signature="e#723#724#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -139,7 +147,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/Jeu/GameActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="60" column="30" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="30" />
+              <caret line="62" column="0" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -151,7 +159,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/ElementJeu.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+              <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -217,9 +225,10 @@
         <option value="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Tile.java" />
         <option value="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Personnage.java" />
         <option value="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Deplacement.java" />
-        <option value="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Personnages.java" />
         <option value="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Assembleur.java" />
+        <option value="$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Personnages.java" />
         <option value="$PROJECT_DIR$/src/com/example/ProjetAndroid/Jeu/GameLoop.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
       </list>
     </option>
   </component>
@@ -704,7 +713,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32506528" sideWeight="0.49444443" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32506528" sideWeight="0.49444443" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3772846" sideWeight="0.51625" order="7" side_tool="true" content_ui="tabs" />
@@ -713,7 +722,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32506528" sideWeight="0.48375" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3772846" sideWeight="0.48375" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3772846" sideWeight="0.48375" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.303125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767624" sideWeight="0.4975" order="1" side_tool="false" content_ui="tabs" />
@@ -834,9 +843,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#positionDesTuiles#0;class#GameLoop#0" expanded="false" />
-            <element signature="method#findPersoActif#0;class#GameLoop#0" expanded="false" />
-            <element signature="method#setDrawableDeplacement#0;class#GameLoop#0" expanded="false" />
+            <element signature="e#7351#7352#0" expanded="true" />
+            <element signature="e#7380#7381#0" expanded="true" />
+            <element signature="e#7869#7870#0" expanded="true" />
+            <element signature="e#7911#7912#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -888,9 +898,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
-            <element signature="method#positionDesTuiles#0;class#GameLoop#0" expanded="false" />
-            <element signature="method#findPersoActif#0;class#GameLoop#0" expanded="false" />
-            <element signature="method#setDrawableDeplacement#0;class#GameLoop#0" expanded="false" />
+            <element signature="e#7351#7352#0" expanded="true" />
+            <element signature="e#7380#7381#0" expanded="true" />
+            <element signature="e#7869#7870#0" expanded="true" />
+            <element signature="e#7911#7912#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1089,18 +1100,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.06383">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/Jeu/GameActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="30" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="30" />
+          <caret line="62" column="0" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1110,7 +1113,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/ElementJeu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -1126,10 +1129,9 @@
     <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Personnage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="38" selection-start-line="77" selection-start-column="38" selection-end-line="77" selection-end-column="38" />
+          <caret line="80" column="9" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getImgSource#0;class#Personnage#0" expanded="false" />
             <element signature="method#setSprite#0;class#Personnage#0" expanded="false" />
           </folding>
         </state>
@@ -1168,36 +1170,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Personnages.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="102" selection-start-line="58" selection-start-column="88" selection-end-line="58" selection-end-column="102" />
-          <folding>
-            <element signature="e#590#591#0" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Assembleur.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="88" column="78" selection-start-line="88" selection-start-column="78" selection-end-line="88" selection-end-column="78" />
+          <caret line="87" column="78" selection-start-line="87" selection-start-column="78" selection-end-line="87" selection-end-column="78" />
           <folding>
             <element signature="method#getInfoTileSet#0;class#Assembleur#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/BriqueJeu/Personnages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#590#591#0" expanded="true" />
+            <element signature="e#625#626#0" expanded="true" />
+            <element signature="e#674#675#0" expanded="true" />
+            <element signature="e#723#724#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/ProjetAndroid/Jeu/GameLoop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.908686">
-          <caret line="81" column="26" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="196" column="17" selection-start-line="196" selection-start-column="17" selection-end-line="196" selection-end-column="17" />
           <folding>
-            <element signature="method#positionDesTuiles#0;class#GameLoop#0" expanded="false" />
-            <element signature="method#findPersoActif#0;class#GameLoop#0" expanded="false" />
-            <element signature="method#setDrawableDeplacement#0;class#GameLoop#0" expanded="false" />
+            <element signature="e#7351#7352#0" expanded="true" />
+            <element signature="e#7380#7381#0" expanded="true" />
+            <element signature="e#7869#7870#0" expanded="true" />
+            <element signature="e#7911#7912#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1015118">
+          <caret line="30" column="67" selection-start-line="30" selection-start-column="67" selection-end-line="30" selection-end-column="67" />
+          <folding />
         </state>
       </provider>
     </entry>

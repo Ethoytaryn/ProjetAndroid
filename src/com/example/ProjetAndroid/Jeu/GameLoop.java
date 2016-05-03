@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
+import java.util.ArrayList;
 import com.example.ProjetAndroid.BriqueJeu.Assembleur;
 import com.example.ProjetAndroid.BriqueJeu.ElementJeu;
 import com.example.ProjetAndroid.BriqueJeu.Personnage;
@@ -18,17 +19,17 @@ public class GameLoop implements Runnable {
     private long m_sleepTime = 10;
     private Context m_context;
 
-    //affichage
+    //Affichage
     private int fps;
     private GameView screen; //écran de jeu
     int m_largeurTile;
 
-    //données partie
+    //Données partie
 
     private ArrayList[][] m_tableauObjet;
     private Rect[][] m_coordTileCanvas;
 
-    //evenement et position doigt
+    //Evenement et position doigt
     private MotionEvent lastEvent; // le dernier évenement enregistré sur l'écran
     private float XEcran = 0;
     private float YEcran = 0;
@@ -72,9 +73,7 @@ public class GameLoop implements Runnable {
         render();
 
         while (m_running) {
-
             startTime = System.currentTimeMillis();
-
             processEvents();
 
             updatePerso();
@@ -82,9 +81,7 @@ public class GameLoop implements Runnable {
             updateCarte();
 
             render();
-
-
-
+            // temps d'action
             elapsedTime = System.currentTimeMillis() - startTime;
             sleepCorrected = m_sleepTime - elapsedTime;
 
@@ -171,7 +168,6 @@ public class GameLoop implements Runnable {
                 screen.getCanva().translate(0, translateY);
                 translateY = 0;
             }
-
     }
 
     public void processEvents() {
@@ -184,10 +180,12 @@ public class GameLoop implements Runnable {
             float x_total = Math.abs(XEcran)+x_actuel;
             float y_total = Math.abs(YEcran)+y_actuel;
 
+
             m_clic_colonne =(int) x_total / m_largeurTile;
             m_clic_ligne = (int) y_total/ m_largeurTile;
 
             if(lastEvent.getAction() == MotionEvent.ACTION_DOWN){
+
 
                 ArrayList<ElementJeu> caseSelec = m_tableauObjet[m_clic_ligne][m_clic_colonne];
                 for(ElementJeu deplacement : caseSelec){
@@ -197,7 +195,6 @@ public class GameLoop implements Runnable {
                         }
                     }
                 }
-
             }
             else if (lastEvent.getAction() == MotionEvent.ACTION_MOVE) {
 
@@ -251,7 +248,6 @@ public class GameLoop implements Runnable {
                 }
              }
      }
-
     public void setLastEvent(MotionEvent lastEvent) {
         this.lastEvent = lastEvent;
     }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.widget.ArrayAdapter;
 import org.w3c.dom.NodeList;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 

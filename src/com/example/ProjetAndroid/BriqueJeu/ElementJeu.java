@@ -1,5 +1,6 @@
 package com.example.ProjetAndroid.BriqueJeu;
 
+
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
@@ -20,6 +21,7 @@ public interface ElementJeu {
     boolean isDeplacement();
 
     ArrayList<int[]> influence(int colonne, int ligne);
+
 
 
 }

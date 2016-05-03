@@ -26,6 +26,10 @@ public class Personnages {
         return m_coordPerso;
     }
 
+    public Personnage getPersonnage(int index){
+       return m_listPersonnage.get(index);
+    }
+
     public int[] getCoordPersonage(Personnage perso) {
         int[] tableauErreur = new int[2];
         for (Personnage m_perso : m_listPersonnage) {
