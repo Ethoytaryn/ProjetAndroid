@@ -53,6 +53,7 @@ public class GameActivity extends Activity {
             coord[1] = 2*(64*2);
             coord[2] = 64*2;
             coord[3] = 64*2;
+
             Personnage premierPerso = new Personnage();
             premierPerso.getImgSource(this).setSprite(coord);
 

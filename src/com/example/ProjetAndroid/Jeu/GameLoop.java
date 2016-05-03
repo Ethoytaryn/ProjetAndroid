@@ -2,19 +2,17 @@ package com.example.ProjetAndroid.Jeu;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.MotionEvent;
 import java.util.ArrayList;
 import com.example.ProjetAndroid.BriqueJeu.Assembleur;
+import com.example.ProjetAndroid.BriqueJeu.ElementJeu;
 import com.example.ProjetAndroid.BriqueJeu.Personnage;
-import com.example.ProjetAndroid.BriqueJeu.Personnages;
-import com.example.ProjetAndroid.BriqueJeu.Tile;
-/**
- * Created by Guillaume on 11/03/2016.
- */
+
+
+import java.util.ArrayList;
+
+
 public class GameLoop implements Runnable {
-    Personnages listPerso;
-    Personnage bob;
     private boolean m_running;  // variable arrêt de la boucle
     private long m_sleepTime = 10;
     private Context m_context;
@@ -34,17 +32,18 @@ public class GameLoop implements Runnable {
     private MotionEvent lastEvent; // le dernier évenement enregistré sur l'écran
     private float XEcran = 0;
     private float YEcran = 0;
-    float x_frame_précédente;
-    float y_frame_précédente;
-    private float translateX;
-    private float translateY;
-    private int m_pos_clic_X;
-    private int m_pos_clic_Y;
-    private boolean maj;
-    Boolean persoClic;
+    float x_frame_précédente = 0;
+    float y_frame_précédente = 0;
+    private float translateX = 0;
+    private float translateY = 0;
+    private int m_clic_colonne;
+    private int m_clic_ligne;
+    boolean m_clickOnPerso;
+    boolean m_clickVoid;
+    private ArrayList<ElementJeu> m_caseSelectionner;
+
 
     public void initGame(Context context, Assembleur assembleur)  {
-        initAction();
         m_tableauObjet = assembleur.getTableau();
         m_nbreTile = 1200;
         m_context = context;
@@ -52,13 +51,10 @@ public class GameLoop implements Runnable {
         screen = new GameView(m_context, this);
         m_largeurTile = 50;
         m_coordTileCanvas = new Rect[30][40];
+        m_clickOnPerso = false;
+        m_clickVoid = false;
         positionDesTuiles();
-        persoClic = false;
-        maj = true;
-        bob = new Personnage();
-        int pos[] = {1,1};
-        listPerso = new Personnages();
-        listPerso.addPerso(bob,pos);
+
     }
 
     /** la boucle de game_screen */
@@ -91,42 +87,57 @@ public class GameLoop implements Runnable {
             }
             // calculer le FSP
             fps = (int) (1000/(System.currentTimeMillis() - startTime));
+
         }
     }
 
     public void render() {
 
-        if(maj){
            for (int i = 0; i < 30; i++) {
                for (int j = 0; j < 40; j++) {
 
                    Rect I = m_coordTileCanvas[i][j];
 
-                   ArrayList listeObjet = m_tableauObjet[i][j];
+                   ArrayList<ElementJeu> listeObjet = m_tableauObjet[i][j];
 
-                   for (Object o : listeObjet) {
-                       Tile tile = new Tile();
-                       if (o.getClass() == tile. getClass())
-                           tile = (Tile) o;
-                           if(tile.getASpite()) {
+                   for (ElementJeu o : listeObjet) {
+
+                       if (o.isDrawable()) {
 
                            if (I.right > (Math.abs(XEcran) - m_largeurTile) || I.left < Math.abs(XEcran) + screen.getM_Width() || I.top > Math.abs(YEcran) - m_largeurTile || I.bottom < Math.abs(YEcran) + screen.getM_height())
-                               screen.getCanva().drawBitmap(tile.getBitmap(), null, I, null);
-
+                               o.dessiner(screen.getCanva(), I);
                        }
-                       else if(o.getClass() == bob.getClass()){
-                               bob = (Personnage) o;
 
-                               screen.getCanva().drawBitmap(bob.getSprite(),null,I,null);
-                           }
                    }
                }
+
+
            }
             screen.invalidate();
-        }
+
     }
 
     public void update() {
+
+            if(m_clickOnPerso) {
+                Personnage bob = findPersonnage(m_caseSelectionner);
+                ArrayList<int[]> caseAPorte = bob.influence(m_clic_ligne, m_clic_colonne);
+                if(bob.isSelected()) {
+                    bob.setSelected(false);
+                    setDrawableDeplacement(caseAPorte,false);
+                }
+                else
+                {
+                    bob.setSelected(true);
+                    setDrawableDeplacement(caseAPorte,true);
+                }
+                m_clickOnPerso = false;
+            }
+
+            if(m_clickVoid){
+                reset();
+            }
+
             if (XEcran + translateX <= 0 && (XEcran - screen.getM_Width() + translateX) > (-50 * 40)) {
                 XEcran += translateX;
                 screen.getCanva().translate(translateX, 0);
@@ -139,42 +150,32 @@ public class GameLoop implements Runnable {
                 translateY = 0;
             }
     }
+
     //récupération des évènements du joueur
     public void processEvents() {
 
         if(lastEvent != null) {
+
+            float x_actuel = lastEvent.getX();
+            float y_actuel = lastEvent.getY();
+
+            float x_total = Math.abs(XEcran)+x_actuel;
+            float y_total = Math.abs(YEcran)+y_actuel;
+
+
+            m_clic_colonne =(int) x_total / m_largeurTile;
+            m_clic_ligne = (int) y_total/ m_largeurTile;
+            
             if(lastEvent.getAction() == MotionEvent.ACTION_DOWN){
 
-                float x_actuel = lastEvent.getX();
-                float y_actuel = lastEvent.getY();
+                m_caseSelectionner = m_tableauObjet[m_clic_ligne][m_clic_colonne];
+                m_clickOnPerso = presencePerso(m_caseSelectionner);
+                //m_clickPortePerso = deplacementActif(m_caseSelectionner);
+                m_clickVoid = !m_clickOnPerso;
 
-                float x_total = Math.abs(XEcran)+x_actuel;
-                float y_total = Math.abs(YEcran)+y_actuel;
-
-                m_pos_clic_X =(int) x_total / m_largeurTile;
-                m_pos_clic_Y = (int) y_total/ m_largeurTile;
-
-                lastEvent = null;
-                ArrayList test = m_tableauObjet[m_pos_clic_Y][m_pos_clic_X];
-                Tile ref = new Tile();
-                persoClic = false;
-                //bob = listPerso.getPersonnage(1);
-                for(Object tile: test){
-                    if(tile.getClass() == bob.getClass()){
-                        persoClic = true;
-                    }
-                }
-                if(!persoClic){
-                        Log.d("Test","Pas de personnage");
-                }
-                else {
-                    Log.d("Test", "Tu clique sur un perso");
-                }
-                maj = true;
             }
             else if (lastEvent.getAction() == MotionEvent.ACTION_MOVE) {
-                float x_actuel = lastEvent.getX();
-                float y_actuel = lastEvent.getY();
+
 
                 if (x_frame_précédente == 0) {
                     x_frame_précédente = x_actuel;
@@ -192,8 +193,17 @@ public class GameLoop implements Runnable {
 
             }
             else if (lastEvent.getAction() == MotionEvent.ACTION_UP) {
-                initAction();
+
+
+                x_frame_précédente = 0;
+                y_frame_précédente = 0;
+                translateX = 0;
+                translateY = 0;
+                m_clic_colonne = 0;
+                m_clic_ligne = 0;
+
             }
+            lastEvent = null;
         }
     }
     // initialisation des attributs de mouvement
@@ -208,6 +218,7 @@ public class GameLoop implements Runnable {
         maj = false;
     }
     // positionnnement de chaque tuile
+
      private void positionDesTuiles(){
 
          for (int i = 0; i < 30; i++) {
@@ -232,14 +243,59 @@ public class GameLoop implements Runnable {
     public void setLastEvent(MotionEvent lastEvent) {
         this.lastEvent = lastEvent;
     }
-    //Gestion du déplacement du personnage
-    public void deplacementPerso(){
 
-        if(persoClic && lastEvent.getAction() == MotionEvent.ACTION_MOVE){
-
+    private void reset(){
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j < 40; j++) {
+                ArrayList<ElementJeu> test = m_tableauObjet[i][j];
+                for(ElementJeu element : test){
+                    if(element.isDeplacement()){
+                        element.setDrawable(false);
+                    }
+                    else if (element.isPersonnage()){
+                        element.setSelected(false);
+                    }
+                }
+            }
         }
+
     }
 
+    private boolean presencePerso(ArrayList<ElementJeu> caseSelect){
+        for(ElementJeu element : caseSelect) {
+            if (element.isPersonnage()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean deplacementActif(ArrayList<ElementJeu> caseSelect){
+        return true;
+    }
+
+    private void setDrawableDeplacement(ArrayList<int[]> caseSelect,boolean e){
+        for(int[] coord : caseSelect) {
+            ArrayList<ElementJeu> temp = m_tableauObjet[coord[0]][coord[1]];
+            for (ElementJeu element : temp) {
+                if (element.isDeplacement()) {
+                    element.setDrawable(e);
+                }
+
+            }
+        }
+
+    }
+
+    private Personnage findPersonnage(ArrayList<ElementJeu> caseSelect) {
+        Personnage bob = new Personnage();
+        for(ElementJeu element : caseSelect){
+            if(element.isPersonnage()){
+                bob = (Personnage) element;
+            }
+        }
+        return bob;
+    }
 
 }
 

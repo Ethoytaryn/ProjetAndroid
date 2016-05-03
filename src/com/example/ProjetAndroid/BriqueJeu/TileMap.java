@@ -1,12 +1,10 @@
 package com.example.ProjetAndroid.BriqueJeu;
 
-import android.util.Log;
-import org.w3c.dom.*;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import java.util.ArrayList;
 
-/**
- * Created by Guillaume on 04/04/2016.
- */
+
 public class TileMap {
 
     private ArrayList<Tile> listTiles = new ArrayList<>();
