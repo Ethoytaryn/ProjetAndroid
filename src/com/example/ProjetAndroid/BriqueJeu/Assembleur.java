@@ -83,8 +83,19 @@ public class Assembleur {
         }
     }
 
+    static public ArrayList[][] bougerTile(int ligneStart, int colStart,int ligneFinish, int colFinish, ElementJeu bob,ArrayList[][] tableau){
+
+        ArrayList<ElementJeu> colonneStart = tableau[ligneStart][colStart];
+        ArrayList<ElementJeu> colonneFinish = tableau[ligneFinish][colFinish];
+        colonneStart.remove(bob);
+        colonneFinish.add(bob);
+
+        return tableau;
+    }
     public ArrayList[][] getTableau() {
         return m_tableau;
     }
+
+    public Personnages getPersonnages(){ return m_listPerso;}
 
 }

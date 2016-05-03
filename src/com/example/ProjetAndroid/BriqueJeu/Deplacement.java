@@ -11,14 +11,15 @@ public class Deplacement implements ElementJeu {
 
     private Paint m_sprite;
     private boolean m_isDrawable;
-    private boolean m_isSelected = false;
-
+    private boolean m_isSelected;
 
     Deplacement(){
         m_isDrawable = false;
-       m_sprite = new Paint();
+        m_isSelected = false;
+        m_sprite = new Paint();
         m_sprite.setColor(Color.BLUE);
         m_sprite.setAlpha(50);
+
     }
     @Override
     public boolean isDrawable() {
@@ -37,7 +38,6 @@ public class Deplacement implements ElementJeu {
 
     @Override
     public boolean isSelected() {
-
         return m_isSelected;
     }
 

@@ -18,7 +18,7 @@ public class Personnage implements ElementJeu {
     private Bitmap m_sprite;
 
     //caractéristique
-    private int m_déplacement = 1;
+    private int m_déplacement = 2;
     private boolean m_isDrawable = true;
     private boolean m_isSelected = false;
 
@@ -69,13 +69,14 @@ public class Personnage implements ElementJeu {
     @Override
     public ArrayList<int[]> influence(int ligne, int colonne) {
         ArrayList<int[]> listCoord = new ArrayList<>();
-        int[] init = {ligne,colonne};
-        listCoord.add(init);
-        for(int i = 1; i <= m_déplacement;i++){
-            int[] coordplus = {ligne,colonne-i};
-            int[] coordmois = {ligne,colonne+i};
-            listCoord.add(coordplus);
-            listCoord.add(coordmois);
+
+        for(int i = -m_déplacement; i <=0  ;i++){
+            for (int j = (-m_déplacement-i); j<=(m_déplacement+i);j++) {
+                int[] coord = {ligne+i, colonne+j};
+                int[] coord2 = {ligne-i, colonne+j};
+                listCoord.add(coord);
+                listCoord.add(coord2);
+            }
         }
         return listCoord;
     }
