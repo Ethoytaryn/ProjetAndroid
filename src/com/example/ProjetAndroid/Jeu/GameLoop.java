@@ -4,15 +4,14 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
+import java.util.ArrayList;
 import com.example.ProjetAndroid.BriqueJeu.Assembleur;
 import com.example.ProjetAndroid.BriqueJeu.Personnage;
 import com.example.ProjetAndroid.BriqueJeu.Personnages;
 import com.example.ProjetAndroid.BriqueJeu.Tile;
-
-
-import java.util.ArrayList;
-
-
+/**
+ * Created by Guillaume on 11/03/2016.
+ */
 public class GameLoop implements Runnable {
     Personnages listPerso;
     Personnage bob;
@@ -20,18 +19,18 @@ public class GameLoop implements Runnable {
     private long m_sleepTime = 10;
     private Context m_context;
 
-    //affichage
+    //Affichage
     private int fps;
     private GameView screen; //écran de jeu
     int m_largeurTile;
 
-    //données partie
+    //Données partie
 
     private ArrayList[][] m_tableauObjet;
     private int m_nbreTile;
     private Rect[][] m_coordTileCanvas;
 
-    //evenement et position doigt
+    //Evenement et position doigt
     private MotionEvent lastEvent; // le dernier évenement enregistré sur l'écran
     private float XEcran = 0;
     private float YEcran = 0;
@@ -73,15 +72,11 @@ public class GameLoop implements Runnable {
         render();
 
         while (m_running) {
-
             startTime = System.currentTimeMillis();
-
             processEvents();
             update();
             render();
-
-
-
+            // temps d'action
             elapsedTime = System.currentTimeMillis() - startTime;
             sleepCorrected = m_sleepTime - elapsedTime;
 
@@ -127,10 +122,7 @@ public class GameLoop implements Runnable {
                    }
                }
            }
-
-
             screen.invalidate();
-
         }
     }
 
@@ -146,9 +138,8 @@ public class GameLoop implements Runnable {
                 screen.getCanva().translate(0, translateY);
                 translateY = 0;
             }
-
     }
-
+    //récupération des évènements du joueur
     public void processEvents() {
 
         if(lastEvent != null) {
@@ -167,15 +158,14 @@ public class GameLoop implements Runnable {
                 ArrayList test = m_tableauObjet[m_pos_clic_Y][m_pos_clic_X];
                 Tile ref = new Tile();
                 persoClic = false;
+                //bob = listPerso.getPersonnage(1);
                 for(Object tile: test){
                     if(tile.getClass() == bob.getClass()){
                         persoClic = true;
                     }
                 }
                 if(!persoClic){
-
                         Log.d("Test","Pas de personnage");
-
                 }
                 else {
                     Log.d("Test", "Tu clique sur un perso");
@@ -217,6 +207,7 @@ public class GameLoop implements Runnable {
         lastEvent = null;
         maj = false;
     }
+    // positionnnement de chaque tuile
      private void positionDesTuiles(){
 
          for (int i = 0; i < 30; i++) {
@@ -233,14 +224,15 @@ public class GameLoop implements Runnable {
                 }
              }
      }
-
+    //Récupération de l'écran
     public GameView getScreen() {
         return screen;
     }
-
+    // Modification du dernier évènement
     public void setLastEvent(MotionEvent lastEvent) {
         this.lastEvent = lastEvent;
     }
+    //Gestion du déplacement du personnage
     public void deplacementPerso(){
 
         if(persoClic && lastEvent.getAction() == MotionEvent.ACTION_MOVE){

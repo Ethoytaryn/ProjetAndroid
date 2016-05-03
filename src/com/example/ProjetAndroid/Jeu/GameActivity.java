@@ -10,8 +10,9 @@ import com.example.ProjetAndroid.BriqueJeu.*;
 import com.example.ProjetAndroid.Parser.XMLDocument;
 import org.w3c.dom.NodeList;
 import java.io.IOException;
-import java.util.ArrayList;
-
+/**
+ * Created by Guillaume on 11/03/2016.
+ */
 
 public class GameActivity extends Activity {
 

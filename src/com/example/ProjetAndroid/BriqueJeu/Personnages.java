@@ -22,7 +22,9 @@ public class Personnages {
     public ArrayList<Personnage> getListPerso(){
         return m_listPersonnage;
     }
-
+    public Personnage getPersonnage(int index){
+       return m_listPersonnage.get(index);
+    }
     public int[] getCoordPersonage(Personnage perso) {
 
         for (Personnage m_perso : m_listPersonnage) {
