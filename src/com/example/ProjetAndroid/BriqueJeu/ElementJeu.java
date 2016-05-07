@@ -19,6 +19,8 @@ public interface ElementJeu {
     boolean isPersonnage();
     boolean isTile();
     boolean isDeplacement();
+    boolean isObstacle();
+    void setObstacle(boolean e);
 
     ArrayList<int[]> influence(int colonne, int ligne);
 

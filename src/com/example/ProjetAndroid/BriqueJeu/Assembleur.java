@@ -2,6 +2,7 @@ package com.example.ProjetAndroid.BriqueJeu;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import org.w3c.dom.NodeList;
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class Assembleur {
 
         for (TileMap map:listMap) {
 
-            ArrayList<Tile> listTiles = map.getListTiles();
+            ArrayList<ElementJeu> listTiles = map.getListTiles();
 
             for(int i = 0; i< 30; i++){
                 for(int j = 0; j < 40; j++){
@@ -76,7 +77,6 @@ public class Assembleur {
     private void ajoutElementDeplacement(){
         for(int i = 0; i< 30; i++){
             for(int j = 0; j < 40; j++){
-
                 m_tableau[i][j].add(new Deplacement());
             }
         }
@@ -96,5 +96,9 @@ public class Assembleur {
     }
 
     public Personnages getPersonnages(){ return m_listPerso;}
+
+    private boolean caseIsObstacle() {
+        return false;
+    }
 
 }

@@ -5,10 +5,8 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
 import java.util.ArrayList;
-import com.example.ProjetAndroid.BriqueJeu.Assembleur;
-import com.example.ProjetAndroid.BriqueJeu.ElementJeu;
-import com.example.ProjetAndroid.BriqueJeu.Personnage;
-import com.example.ProjetAndroid.BriqueJeu.Personnages;
+
+import com.example.ProjetAndroid.BriqueJeu.*;
 
 import java.util.ArrayList;
 
@@ -131,10 +129,10 @@ public class GameLoop implements Runnable {
             ElementJeu tile = findPersoActif(rangPersoActif,m_listPersonnages);
             m_tableauObjet = Assembleur.bougerTile(coord[0],coord[1],m_clic_ligne,m_clic_colonne,tile,m_tableauObjet);
             m_coordPerso = Personnages.setCoordPerso(m_coordPerso,rangPersoActif,m_clic_ligne,m_clic_colonne);
-            resetMvtCase();
-
             m_AfficherPorteePerso = true;
             m_mvmtPerso = false;
+
+            resetMvtCase();
         }
     }
 
@@ -145,8 +143,6 @@ public class GameLoop implements Runnable {
                 int[] coord = m_coordPerso.get(m_listPersonnages.indexOf(bob));
                 ArrayList<int[]> caseAPorte = bob.influence(coord[0], coord[1]);
                 if (bob.isSelected()) {
-                    setDrawableDeplacement(caseAPorte, true);
-                } else {
                     setDrawableDeplacement(caseAPorte, true);
                 }
             }
@@ -186,12 +182,15 @@ public class GameLoop implements Runnable {
 
             if(lastEvent.getAction() == MotionEvent.ACTION_DOWN){
 
-
                 ArrayList<ElementJeu> caseSelec = m_tableauObjet[m_clic_ligne][m_clic_colonne];
                 for(ElementJeu deplacement : caseSelec){
                     if(deplacement.isDeplacement()){
-                        if(deplacement.isDrawable()){
-                            m_mvmtPerso = true;
+                        Log.d("test",""+deplacement.isObstacle());
+                        if(deplacement.isDrawable()) {
+
+                            if (!deplacement.isObstacle()) {
+                                m_mvmtPerso = true;
+                            }
                         }
                     }
                 }
@@ -216,6 +215,7 @@ public class GameLoop implements Runnable {
             }
             else if (lastEvent.getAction() == MotionEvent.ACTION_UP) {
 
+
                 m_mvmtPerso = false;
                 x_frame_précédente = 0;
                 y_frame_précédente = 0;
@@ -225,7 +225,6 @@ public class GameLoop implements Runnable {
                 m_clic_ligne = 0;
 
             }
-
             lastEvent = null;
         }
     }
@@ -259,6 +258,7 @@ public class GameLoop implements Runnable {
                 for(ElementJeu element : test){
                     if(element.isDeplacement()){
                         element.setDrawable(false);
+                        element.setObstacle(false);
                     }
                 }
             }
@@ -273,16 +273,37 @@ public class GameLoop implements Runnable {
 
     private void setDrawableDeplacement(ArrayList<int[]> caseSelect,boolean e){
         for(int[] coord : caseSelect) {
-            ArrayList<ElementJeu> temp = m_tableauObjet[coord[0]][coord[1]];
-            for (ElementJeu element : temp) {
-                if (element.isDeplacement()) {
-                    element.setDrawable(e);
-                }
+            if(coord[0]>=0 && coord[0]<30){
+                if(coord[1]>=0 && coord[1]<40){
+                    ArrayList<ElementJeu> temp = m_tableauObjet[coord[0]][coord[1]];
+                    boolean obstacle = obstacleDetection(temp);
+                    for (ElementJeu element : temp) {
+                        if (element.isDeplacement()) {
+                            element.setDrawable(e);
+                            if(obstacle){
+                                element.setObstacle(true);
+                            }
+                        }
 
+                    }
+                }
+            }
+
+        }
+    }
+
+    private boolean obstacleDetection(ArrayList<ElementJeu> caseSelected){
+        Boolean isHere = false;
+        for(ElementJeu brique : caseSelected) {
+            if (brique.isObstacle()) {
+                isHere = true;
+                break;
             }
         }
+        return isHere;
 
     }
+
 
 
 

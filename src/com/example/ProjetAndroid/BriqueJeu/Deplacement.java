@@ -12,20 +12,23 @@ public class Deplacement implements ElementJeu {
     private Paint m_sprite;
     private boolean m_isDrawable;
     private boolean m_isSelected;
+    private boolean m_obstacle;
 
-    Deplacement(){
+    public Deplacement(){
         m_isDrawable = false;
         m_isSelected = false;
+        m_obstacle = false;
         m_sprite = new Paint();
-        m_sprite.setColor(Color.BLUE);
-        m_sprite.setAlpha(50);
+
 
     }
     @Override
     public boolean isDrawable() {
         return m_isDrawable;
     }
-
+    public void setObstacle(boolean obstacle){
+        m_obstacle = obstacle;
+    }
     @Override
     public void setDrawable(boolean e){
         m_isDrawable = e;
@@ -33,6 +36,13 @@ public class Deplacement implements ElementJeu {
 
     @Override
     public void dessiner(Canvas canvas, Rect positionElement) {
+        if(m_obstacle){
+            m_sprite.setColor(Color.RED);
+        }
+        else{
+            m_sprite.setColor(Color.BLUE);
+        }
+        m_sprite.setAlpha(70);
         canvas.drawRect(positionElement,m_sprite);
     }
 
@@ -59,6 +69,11 @@ public class Deplacement implements ElementJeu {
     @Override
     public boolean isDeplacement() {
         return true;
+    }
+
+    @Override
+    public boolean isObstacle() {
+        return false;
     }
 
     @Override

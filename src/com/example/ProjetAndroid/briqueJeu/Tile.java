@@ -17,23 +17,25 @@ public class Tile implements ElementJeu {
     private boolean m_isDrawable;
     private Bitmap m_bitmap;
     private boolean m_isSelected = false;
+    private boolean m_obstacle;
 
     public Tile(){
 
     }
 
-    public Tile(int numeroSprite, TileSets listeTileSets) {
+    public Tile(int numeroSprite, TileSets listeTileSets, boolean obstacle) {
 
         m_numeroSprite = numeroSprite;
         m_tileset = listeTileSets.getTileSet(m_numeroSprite);
 
         if (numeroSprite !=0){
             m_isDrawable = true;
-
+            m_obstacle = obstacle;
             m_bitmap = m_tileset.getBitMap(m_numeroSprite);
         }
         else
         {
+            m_obstacle = false;
             m_isDrawable = false;
         }
     }
@@ -79,17 +81,19 @@ public class Tile implements ElementJeu {
     }
 
     @Override
+    public boolean isObstacle() {
+        return m_obstacle;
+    }
+
+    @Override
+    public void setObstacle(boolean e) {
+
+    }
+
+    @Override
     public ArrayList<int[]> influence(int positionX, int positionY) {
         ArrayList<int[]> temp = new ArrayList<>();
         return temp;
-    }
-
-
-    public int getNumeroSprite(){
-        return m_numeroSprite;
-    }
-    public Bitmap getBitmap(){
-        return m_bitmap;
     }
 
 }

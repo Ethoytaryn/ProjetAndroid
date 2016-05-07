@@ -68,15 +68,29 @@ public class Personnage implements ElementJeu {
     }
 
     @Override
+    public boolean isObstacle() {
+        return true;
+    }
+
+    @Override
+    public void setObstacle(boolean e) {
+
+    }
+
+    @Override
     public ArrayList<int[]> influence(int ligne, int colonne) {
         ArrayList<int[]> listCoord = new ArrayList<>();
 
-        for(int i = -m_déplacement; i <=0  ;i++){
-            for (int j = (-m_déplacement-i); j<=(m_déplacement+i);j++) {
-                int[] coord = {ligne+i, colonne+j};
-                int[] coord2 = {ligne-i, colonne+j};
-                listCoord.add(coord);
-                listCoord.add(coord2);
+        for(int i = m_déplacement; i >=0  ;i--){
+            for (int j = (-m_déplacement+i); j<=(m_déplacement-i);j++) {
+
+                        int[] coord = {ligne - i, colonne + j};
+                        listCoord.add(coord);
+
+                        int[] coord1 = {ligne + i, colonne + j};
+                        listCoord.add(coord1);
+
+
             }
         }
         return listCoord;

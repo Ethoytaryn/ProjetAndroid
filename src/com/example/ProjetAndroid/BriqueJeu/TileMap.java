@@ -1,5 +1,6 @@
 package com.example.ProjetAndroid.BriqueJeu;
 
+import android.util.Log;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import java.util.ArrayList;
@@ -7,10 +8,11 @@ import java.util.ArrayList;
 
 public class TileMap {
 
-    private ArrayList<Tile> listTiles = new ArrayList<>();
+    private ArrayList<ElementJeu> listTiles = new ArrayList<>();
     private String m_nomCouche;
     private int m_largeur;
     private int m_hauteur;
+    private boolean m_obstacle;
 
     TileMap(Element e,TileSets listeTileSets){
 
@@ -20,11 +22,17 @@ public class TileMap {
 
         NodeList tuiles = e.getElementsByTagName("tile");
 
+        if(m_nomCouche.contains("obstacle")){
+            m_obstacle = true;
+        }
+        else{
+            m_obstacle = false;
+        }
 
         for(int i=0; i < tuiles.getLength();i++){
             Element tuile = (Element) tuiles.item(i);
             int nmrTuile = Integer.parseInt(tuile.getAttribute("gid"));
-            listTiles.add(new Tile(nmrTuile,listeTileSets));
+            listTiles.add(new Tile(nmrTuile, listeTileSets, m_obstacle));
         }
     }
 
@@ -33,7 +41,7 @@ public class TileMap {
         return m_largeur;
     }
 
-    public ArrayList<Tile> getListTiles() {
+    public ArrayList<ElementJeu> getListTiles() {
         return listTiles;
     }
 
