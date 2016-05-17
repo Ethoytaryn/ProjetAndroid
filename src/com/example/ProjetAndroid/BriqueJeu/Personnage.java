@@ -23,8 +23,14 @@ public class Personnage implements ElementJeu {
     private boolean m_isDrawable = true;
     private boolean m_isSelected = false;
 
-    public Personnage(){
-
+    public Personnage(Context context){
+        getImgSource(context);
+        int[] coord = new int[4];
+        coord[0] = 0;
+        coord[1] = 11*(64*2);
+        coord[2] = 64*2;
+        coord[3] = 64*2;
+        setSprite(coord);
     }
 
     @Override
@@ -103,13 +109,13 @@ public class Personnage implements ElementJeu {
 
 
 
-    public Personnage getImgSource(Context context){
+    private Personnage getImgSource(Context context){
         int resID = context.getResources().getIdentifier(m_nomTileSet, "drawable", context.getPackageName());
         m_img_src = ((BitmapDrawable) context.getResources().getDrawable(resID)).getBitmap();
         return this;
     }
     //Modification de la position du sprite
-    public Personnage setSprite(int[] coord){
+    private Personnage setSprite(int[] coord){
        m_sprite = Bitmap.createBitmap(m_img_src,coord[0],coord[1],coord[2],coord[3]);
         return this;
     }

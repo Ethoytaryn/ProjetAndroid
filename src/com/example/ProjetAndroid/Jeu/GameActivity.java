@@ -48,15 +48,10 @@ public class GameActivity extends Activity {
             NodeList elist1 = m_carte.getNode("tileset");
             NodeList elist2 = m_carte.getNode("layer");
 
-            int[] coord = new int[4];
-            coord[0] = 0;
-            coord[1] = 2*(64*2);
-            coord[2] = 64*2;
-            coord[3] = 64*2;
+            //création du personnage
+            Personnage premierPerso = new Personnage(this);
 
-            Personnage premierPerso = new Personnage();
-            premierPerso.getImgSource(this).setSprite(coord);
-
+            //creation de la liste des personnage et placement manuel du premier
             Personnages listPerso = new Personnages();
             int[] position ={15,10};
             listPerso.addPerso(premierPerso,position);
@@ -69,6 +64,7 @@ public class GameActivity extends Activity {
             e.printStackTrace();
         }
 
+        //initialisation
         m_gameLoop = new GameLoop();
         m_gameLoop.initGame(this,m_assembleur);
         setContentView(m_gameLoop.getScreen());

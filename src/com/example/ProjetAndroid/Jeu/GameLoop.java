@@ -1,6 +1,8 @@
 package com.example.ProjetAndroid.Jeu;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -80,7 +82,9 @@ public class GameLoop implements Runnable {
             updateDeplacement();
             updateCarte();
 
-            render();
+            renderCarte();
+            renderPerso();
+            screen.invalidate();
             // temps d'action
             elapsedTime = System.currentTimeMillis() - startTime;
             sleepCorrected = m_sleepTime - elapsedTime;
@@ -100,7 +104,7 @@ public class GameLoop implements Runnable {
         }
     }
 
-    public void render() {
+    public void renderCarte() {
 
            for (int i = 0; i < 30; i++) {
                for (int j = 0; j < 40; j++) {
@@ -118,10 +122,15 @@ public class GameLoop implements Runnable {
                        }
                        else{
                            if(o.isDrawable()) {
-                               if (I.right > (Math.abs(XEcran) - m_largeurTile) || I.left < Math.abs(XEcran) + screen.getM_Width() || I.top > Math.abs(YEcran) - m_largeurTile || I.bottom < Math.abs(YEcran) + screen.getM_height())
-                                   o.dessiner(screen.getCanva(),m_CoordMouvementPerso.get(0));
-                                  if(m_CoordMouvementPerso.size()>1){
+                               if (I.right > (Math.abs(XEcran) - m_largeurTile) || I.left < Math.abs(XEcran) + screen.getM_Width() || I.top > Math.abs(YEcran) - m_largeurTile || I.bottom < Math.abs(YEcran) + screen.getM_height()) {
+                                   
+                                   o.dessiner(screen.getCanva(), m_CoordMouvementPerso.get(0));
+                               }
+                                  if(m_CoordMouvementPerso.size()>1) {
                                       m_CoordMouvementPerso.remove(0);
+                                  }
+                                  else{
+                                      m_AfficherPorteePerso = true;
                                   }
                            }
                        }
@@ -130,23 +139,36 @@ public class GameLoop implements Runnable {
 
                }
            }
-            screen.invalidate();
+    }
 
+    public void renderPerso(){
+
+        int rangPersoActif = Personnages.getPersonnageActif(m_listPersonnages);
+        ElementJeu persoActif = findPersoActif(rangPersoActif,m_listPersonnages);
+
+            persoActif.dessiner(screen.getCanva(),m_CoordMouvementPerso.get(0));
+            if(m_CoordMouvementPerso.size()>1) {
+                m_CoordMouvementPerso.remove(0);
+            }
+            else{
+                m_AfficherPorteePerso = true;
+            }
     }
 
     public void updatePerso(){
 
-
-
         if(m_mvmtPerso){
 
             int rangPersoActif = Personnages.getPersonnageActif(m_listPersonnages);
-            ElementJeu tile = findPersoActif(rangPersoActif,m_listPersonnages);
+
+            ElementJeu persoActif = findPersoActif(rangPersoActif,m_listPersonnages);
             int[] coord = Personnages.getCoordPersonnageActif(rangPersoActif,m_coordPerso);
+
             CoordMmouvementPerso(m_clic_ligne,m_clic_colonne);
-            m_tableauObjet = Assembleur.bougerTile(coord[0],coord[1],m_clic_ligne,m_clic_colonne,tile,m_tableauObjet);
+
+            m_tableauObjet = Assembleur.bougerTile(coord[0],coord[1],m_clic_ligne,m_clic_colonne,persoActif,m_tableauObjet);
             m_coordPerso = Personnages.setCoordPerso(m_coordPerso,rangPersoActif,m_clic_ligne,m_clic_colonne);
-            m_AfficherPorteePerso = true;
+
             m_mvmtPerso = false;
             resetMvtCase();
         }
@@ -167,7 +189,7 @@ public class GameLoop implements Runnable {
         }
     }
 
-        public void updateCarte(){
+    public void updateCarte(){
 
 
             if (XEcran + translateX <= 0 && (XEcran - screen.getM_Width() + translateX) > (-50 * 40)) {
@@ -185,61 +207,61 @@ public class GameLoop implements Runnable {
 
     public void processEvents() {
 
-        if(lastEvent != null) {
+        if(!m_mvmtPerso) {
+            if (lastEvent != null) {
 
-            float x_actuel = lastEvent.getX();
-            float y_actuel = lastEvent.getY();
+                float x_actuel = lastEvent.getX();
+                float y_actuel = lastEvent.getY();
 
-            float x_total = Math.abs(XEcran)+x_actuel;
-            float y_total = Math.abs(YEcran)+y_actuel;
+                float x_total = Math.abs(XEcran) + x_actuel;
+                float y_total = Math.abs(YEcran) + y_actuel;
 
-            m_clic_colonne =(int) x_total / m_largeurTile;
-            m_clic_ligne = (int) y_total/ m_largeurTile;
+                m_clic_colonne = (int) x_total / m_largeurTile;
+                m_clic_ligne = (int) y_total / m_largeurTile;
 
-            if(lastEvent.getAction() == MotionEvent.ACTION_DOWN){
+                if (lastEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
-                ArrayList<ElementJeu> caseSelec = m_tableauObjet[m_clic_ligne][m_clic_colonne];
-                for(ElementJeu deplacement : caseSelec){
-                    if(deplacement.isDeplacement()){
-                        if(deplacement.isDrawable()) {
-                            if (!deplacement.isObstacle()) {
-                                m_mvmtPerso = true;
+                    ArrayList<ElementJeu> caseSelec = m_tableauObjet[m_clic_ligne][m_clic_colonne];
+                    for (ElementJeu deplacement : caseSelec) {
+                        if (deplacement.isDeplacement()) {
+                            if (deplacement.isDrawable()) {
+                                if (!deplacement.isObstacle()) {
+                                    m_mvmtPerso = true;
+                                }
                             }
                         }
                     }
-                }
-            }
-            else if (lastEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                } else if (lastEvent.getAction() == MotionEvent.ACTION_MOVE) {
 
-                m_mvmtPerso = false;
-                if (x_frame_précédente == 0) {
+                    m_mvmtPerso = false;
+                    if (x_frame_précédente == 0) {
+                        x_frame_précédente = x_actuel;
+                    }
+
+                    if (y_frame_précédente == 0) {
+                        y_frame_précédente = y_actuel;
+                    }
+
+                    translateX = x_actuel - x_frame_précédente;
+                    translateY = y_actuel - y_frame_précédente;
+
                     x_frame_précédente = x_actuel;
-                }
-
-                if(y_frame_précédente == 0){
                     y_frame_précédente = y_actuel;
+
+                } else if (lastEvent.getAction() == MotionEvent.ACTION_UP) {
+
+
+                    m_mvmtPerso = false;
+                    x_frame_précédente = 0;
+                    y_frame_précédente = 0;
+                    translateX = 0;
+                    translateY = 0;
+                    m_clic_colonne = 0;
+                    m_clic_ligne = 0;
+
                 }
-
-                translateX = x_actuel - x_frame_précédente;
-                translateY = y_actuel - y_frame_précédente;
-
-                x_frame_précédente = x_actuel ;
-                y_frame_précédente = y_actuel;
-
+                lastEvent = null;
             }
-            else if (lastEvent.getAction() == MotionEvent.ACTION_UP) {
-
-
-                m_mvmtPerso = false;
-                x_frame_précédente = 0;
-                y_frame_précédente = 0;
-                translateX = 0;
-                translateY = 0;
-                m_clic_colonne = 0;
-                m_clic_ligne = 0;
-
-            }
-            lastEvent = null;
         }
     }
 
@@ -266,13 +288,39 @@ public class GameLoop implements Runnable {
         Rect init = m_CoordMouvementPerso.get(0);
         Rect arrive = m_coordTileCanvas[ligne_arrive][colonne_arrive];
 
-        for (int i = init.left; i <= arrive.left; i += 10){
+        int deltaX = arrive.left-init.left;
+        int deltaY = arrive.top-init.top;
+
+        int signeX = -1;
+        if(deltaX >= 0){
+            signeX=1;
+        }
+        int signeY = -1;
+        if(deltaY >= 0){
+            signeY=1;
+        }
+
+        for (int i = 10; i < Math.abs(deltaX); i += 2){
             Rect temp = new Rect();
-            temp.left = i;
+            temp.left = init.left+(i*signeX);
             temp.right = temp.left+50;
-            temp.top = arrive.top;
+            temp.top = init.top;
             temp.bottom = temp.top+50;
             m_CoordMouvementPerso.add(temp);
+        }
+
+        for(int i = 10; i < Math.abs(deltaY);i +=2){
+            Rect temp = new Rect();
+            temp.left = arrive.left;
+            temp.right = temp.left+50;
+            temp.top = init.top+(i*signeY);
+            temp.bottom = temp.top+50;
+            m_CoordMouvementPerso.add(temp);
+        }
+
+        m_CoordMouvementPerso.add(arrive);
+        for(Rect element : m_CoordMouvementPerso){
+            Log.d("test",""+element);
         }
     }
 
