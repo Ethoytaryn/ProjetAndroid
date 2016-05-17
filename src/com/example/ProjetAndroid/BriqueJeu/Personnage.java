@@ -63,6 +63,11 @@ public class Personnage implements ElementJeu {
     }
 
     @Override
+    public int getTypeTile() {
+        return -1;
+    }
+
+    @Override
     public boolean isDeplacement() {
         return false;
     }
@@ -73,7 +78,7 @@ public class Personnage implements ElementJeu {
     }
 
     @Override
-    public void setObstacle(boolean e) {
+    public void setAcces(ArrayList<ElementJeu> caseTile) {
 
     }
 

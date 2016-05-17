@@ -77,10 +77,13 @@ public class Assembleur {
     private void ajoutElementDeplacement(){
         for(int i = 0; i< 30; i++){
             for(int j = 0; j < 40; j++){
-                m_tableau[i][j].add(new Deplacement());
+                ElementJeu deplacement = new Deplacement();
+                deplacement.setAcces(m_tableau[i][j]);
+                m_tableau[i][j].add(deplacement);
             }
         }
     }
+
 
     static public ArrayList[][] bougerTile(int ligneStart, int colStart,int ligneFinish, int colFinish, ElementJeu bob,ArrayList[][] tableau){
 

@@ -18,9 +18,10 @@ public interface ElementJeu {
     void setSelected(boolean e);
     boolean isPersonnage();
     boolean isTile();
+    int getTypeTile();
     boolean isDeplacement();
     boolean isObstacle();
-    void setObstacle(boolean e);
+    void setAcces(ArrayList<ElementJeu> caseTile);
 
     ArrayList<int[]> influence(int colonne, int ligne);
 

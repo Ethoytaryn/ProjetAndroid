@@ -1,6 +1,7 @@
 package com.example.ProjetAndroid.BriqueJeu;
 
 import android.graphics.*;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -26,9 +27,21 @@ public class Deplacement implements ElementJeu {
     public boolean isDrawable() {
         return m_isDrawable;
     }
-    public void setObstacle(boolean obstacle){
-        m_obstacle = obstacle;
+
+    @Override
+    public void setAcces(ArrayList<ElementJeu> case_selected){
+        for(ElementJeu element : case_selected){
+            if(element.getTypeTile()==2){
+                m_obstacle = false;
+                break;
+            }
+            else if(element.getTypeTile()==1){
+                m_obstacle = true;
+            }
+        }
+
     }
+
     @Override
     public void setDrawable(boolean e){
         m_isDrawable = e;
@@ -67,14 +80,20 @@ public class Deplacement implements ElementJeu {
     }
 
     @Override
+    public int getTypeTile() {
+        return -1;
+    }
+
+    @Override
     public boolean isDeplacement() {
         return true;
     }
 
     @Override
     public boolean isObstacle() {
-        return false;
+        return m_obstacle;
     }
+
 
     @Override
     public ArrayList<int[]> influence(int positionX, int positionY) {

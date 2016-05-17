@@ -12,30 +12,27 @@ import java.util.ArrayList;
  */
 public class Tile implements ElementJeu {
 
+    private int m_type;
     private int m_numeroSprite;
     private TileSet m_tileset;
     private boolean m_isDrawable;
     private Bitmap m_bitmap;
     private boolean m_isSelected = false;
-    private boolean m_obstacle;
 
-    public Tile(){
+    public Tile(int numeroSprite, TileSets listeTileSets, int type) {
 
-    }
-
-    public Tile(int numeroSprite, TileSets listeTileSets, boolean obstacle) {
-
+        m_type = type;
         m_numeroSprite = numeroSprite;
         m_tileset = listeTileSets.getTileSet(m_numeroSprite);
 
         if (numeroSprite !=0){
+            m_type = type;
             m_isDrawable = true;
-            m_obstacle = obstacle;
             m_bitmap = m_tileset.getBitMap(m_numeroSprite);
         }
         else
         {
-            m_obstacle = false;
+            m_type = 0;
             m_isDrawable = false;
         }
     }
@@ -76,17 +73,21 @@ public class Tile implements ElementJeu {
     }
 
     @Override
+    public int getTypeTile() {
+        return m_type;
+    }
+    @Override
     public boolean isDeplacement() {
         return false;
     }
 
     @Override
     public boolean isObstacle() {
-        return m_obstacle;
+        return false;
     }
 
     @Override
-    public void setObstacle(boolean e) {
+    public void setAcces(ArrayList<ElementJeu> caseTile) {
 
     }
 
